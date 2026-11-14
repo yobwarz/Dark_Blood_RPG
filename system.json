@@ -53,6 +53,6 @@
     }
   ],
   "url": "https://github.com/yobwarz/Dark_Blood_RPG",
-  "manifest": "https://github.com/yobwarz/Dark_Blood_RPG/releases/latest/download/system.json",
-  "download": "https://github.com/yobwarz/Dark_Blood_RPG/releases/download/v0.8.6/sangue-escuro.zip"
+  "manifest": "https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG/main/system.json",
+  "download": "https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG/v0.8.6/dist/sangue-escuro.zip"
 }
