@@ -1,0 +1,170 @@
+/* Fontes locais sob SIL Open Font License; não dependem de acesso ao Google Fonts. */
+@font-face{font-family:"SE Spectral";src:url("../assets/fonts/Spectral-Medium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"SE Spectral";src:url("../assets/fonts/Spectral-SemiBold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"SE Source Sans 3";src:url("../assets/fonts/SourceSans3.ttf") format("truetype");font-weight:200 900;font-style:normal;font-display:swap}
+
+/* Esta paleta é local à Alternativa 1; a Clássica e o chat mantêm o tema escolhido. */
+.sangue-escuro.se-alternativa-1{
+ --alt-fundo:#191c20;--alt-superficie:#272c33;--alt-texto:#e7e8e5;--alt-secundario:#bac2cc;
+ --alt-estrutura:#aab6c5;--alt-divisor:#49515c;--alt-destaque:#934454;--alt-foco:#d5deeb;
+ --se-fundo:var(--alt-fundo);--se-painel:var(--alt-superficie);--se-texto:var(--alt-texto);
+ --se-texto-fraco:var(--alt-secundario);--se-detalhe:var(--alt-estrutura);--se-destaque:var(--alt-destaque);
+ --se-creme:var(--alt-superficie);--se-creme-texto:var(--alt-texto);--se-pip:var(--alt-texto);
+ --se-linha:var(--alt-divisor);--se-linha-fraca:var(--alt-divisor);--se-vidro:var(--alt-superficie);
+ --se-fonte-titulo:"SE Spectral",Georgia,serif;--se-fonte-texto:"SE Source Sans 3",sans-serif;--se-fonte-escrita:var(--se-fonte-texto);
+ font-family:var(--se-fonte-texto);font-size:16px;line-height:1.35;font-variant-numeric:tabular-nums;
+}
+.application.sangue-escuro.se-alternativa-1{background:var(--alt-fundo)!important;border-color:var(--alt-divisor)}
+.se-alternativa-1 .se-ficha{font-size:16px;line-height:1.35}
+.se-alternativa-1 .se-corpo{padding:12px 24px 24px;gap:16px}
+.se-alternativa-1 :is(label,em,.se-dica,.se-vazio,.se-recurso-dica,.se-derivados span,.se-nota){font-style:normal;text-shadow:none;opacity:1}
+.se-alternativa-1 :is(input,select,textarea,button){font-family:var(--se-fonte-texto);font-variant-numeric:tabular-nums;box-shadow:none}
+.se-alternativa-1 :is(input[type=text],input[type=number],select,textarea){background:var(--alt-superficie);border:1px solid var(--alt-estrutura);color:var(--alt-texto);border-radius:4px;font-size:16px}
+.se-alternativa-1 :is(input,textarea)::placeholder{color:var(--alt-secundario);opacity:1}
+.se-alternativa-1 :is(button,input,select,textarea,a):focus-visible{outline:2px solid var(--alt-foco);outline-offset:3px;box-shadow:none}
+.se-alternativa-1 :is(h3,h4){font-family:var(--se-fonte-titulo);font-size:16px;font-weight:600;color:var(--alt-texto);letter-spacing:0;text-transform:none}
+.se-alternativa-1 .se-marca-titulo{font-size:28px;font-weight:500;letter-spacing:.04em;color:var(--alt-texto);text-shadow:none}
+.se-alternativa-1 .se-marca-sub{font-family:var(--se-fonte-texto);font-size:14px;letter-spacing:.12em}
+.se-alternativa-1 :is(.se-ornamento-topo,.se-divisor){color:var(--alt-divisor)}
+.se-alternativa-1 :is(.se-ornamento-topo .fio,.se-divisor span){background:var(--alt-divisor);opacity:1}
+.se-alternativa-1 :is(.se-ornamento-topo i,.se-divisor i){border:1px solid var(--alt-divisor);box-shadow:none}
+.se-alternativa-1 :is(.se-ornamento-topo i.grande,.se-divisor i.grande){background:var(--alt-destaque);border-color:var(--alt-destaque);box-shadow:none}
+
+/* Identidade sem sobreposição com o retrato. O palco pode quebrar para duas linhas. */
+.se-alternativa-1 .se-palco{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:24px;margin:0}
+.se-alternativa-1 .se-identidade-bloco{flex:1 1 300px;min-width:0;display:grid;grid-template-columns:112px minmax(150px,1fr);gap:16px}
+.se-alternativa-1 .se-retrato{width:112px;height:112px;border:1px solid var(--alt-estrutura);box-shadow:none;z-index:auto}
+.se-alternativa-1 .se-retrato img{filter:none}
+.se-alternativa-1 .se-pilulas{margin:0;padding:0;gap:8px}
+.se-alternativa-1 .se-pilula{display:grid;gap:4px;height:auto;padding:0;background:none;border:0;border-radius:0;box-shadow:none}
+.se-alternativa-1 .se-pilula-rotulo{position:static;transform:none;min-width:0;text-align:left;height:auto;line-height:1.35;padding:0;border:0;border-radius:0;background:none;color:var(--alt-secundario);font:400 14px/1.35 var(--se-fonte-texto);letter-spacing:0;text-transform:none}
+.se-alternativa-1 .se-pilula input{height:36px;padding:6px 10px;text-align:left;border:1px solid var(--alt-estrutura)!important;background:var(--alt-superficie)!important;color:var(--alt-texto)!important;border-radius:4px;font-size:16px}
+.se-alternativa-1 .se-pilula input[name=name]{font-size:20px;font-weight:600}
+.se-alternativa-1 .se-pilula input::placeholder{color:var(--alt-secundario)}
+.se-alternativa-1 .se-pilula input:focus{outline-color:var(--alt-foco);border-radius:4px}
+
+/* Roda de sete atributos, na ordem original do sistema. */
+.se-alternativa-1 .se-roda-espaco{flex:0 1 530px;width:530px;max-width:100%;overflow-x:auto;overflow-y:hidden;padding-block:6px;scrollbar-width:thin}
+.se-alternativa-1 .se-roda{width:530px;min-width:530px;height:380px;max-width:none}
+.se-alternativa-1 .se-roda-arte{width:252px;height:252px}
+.se-alternativa-1 .se-roda-arte .anel{stroke:var(--alt-divisor);opacity:1;stroke-width:1}
+.se-alternativa-1 .se-roda-arte .arco{fill:var(--alt-secundario)}
+.se-alternativa-1 .se-roda-arte .gota{fill:var(--alt-destaque);opacity:1}
+.se-alternativa-1 .se-roda-arte :is(.raios,.veio,.anel.fino){display:none}
+.se-alternativa-1 .se-no-circulo{width:52px;height:52px;box-sizing:border-box;border:1px solid var(--alt-estrutura);background:var(--alt-superficie);box-shadow:none}
+.se-alternativa-1 .se-no-circulo input{color:var(--alt-texto)!important;font:600 24px/1.35 var(--se-fonte-texto)}
+.se-alternativa-1 .se-no-rotulo{font:600 16px/1.35 var(--se-fonte-texto);color:var(--alt-texto);text-shadow:none}
+.se-alternativa-1 .lado-esq .se-no-rotulo{right:calc(100% + 12px)}
+.se-alternativa-1 .lado-dir .se-no-rotulo{left:calc(100% + 12px)}
+.se-alternativa-1 .se-no-mod{left:50%;right:auto;bottom:-39px;transform:translateX(-50%);width:30px;min-width:30px;height:30px;min-height:30px;box-sizing:border-box;padding:0;margin:0;line-height:1;border:1px solid var(--alt-estrutura);border-radius:50%;background:var(--alt-fundo);color:var(--alt-texto);font:600 17px/1 var(--se-fonte-texto);cursor:pointer}
+.se-alternativa-1 .se-no-mod:hover{background:var(--alt-superficie)}
+
+/* Recursos: o número atual vem antes do máximo ou limite. */
+.se-alternativa-1 .se-recursos{gap:12px;margin:0}
+.se-alternativa-1 .se-secundarios{gap:12px;margin:0}
+.se-alternativa-1 .se-alt-recurso{border:1px solid var(--alt-divisor);border-radius:4px;padding:12px;gap:8px;min-width:0}
+.se-alternativa-1 .se-alt-recurso .se-recurso-nome{border:0;padding:0;background:none;text-align:left;color:var(--alt-texto);font:600 16px/1.35 var(--se-fonte-texto);white-space:normal}
+.se-alternativa-1 .se-alt-valores{display:flex;gap:8px;align-items:flex-end}
+.se-alternativa-1 .se-alt-valores label,.se-alternativa-1 .se-alt-limite{display:grid;gap:4px;flex:1;min-width:0;color:var(--alt-secundario);font-size:14px}
+.se-alternativa-1 .se-alt-valores input{width:100%;height:36px;padding:4px 6px;text-align:center;font-size:20px;font-weight:600}
+.se-alternativa-1 .se-alt-limite strong{display:flex;height:36px;align-items:center;justify-content:center;color:var(--alt-texto);font-size:20px;font-weight:600}
+.se-alternativa-1 .se-alt-barra{height:36px;display:flex;align-items:center;color:var(--alt-secundario)}
+.se-alternativa-1 .se-recurso-dica{white-space:normal;overflow:visible;text-align:left;padding:0;font-size:14px;line-height:1.35;flex:none}
+.se-alternativa-1 .se-pips{padding:0;gap:0;flex-wrap:wrap}
+.se-alternativa-1 .se-pip{display:grid;place-items:center;width:24px;height:24px;border:0;background:transparent;transition:none}
+.se-alternativa-1 .se-pip::before{content:"";width:12px;height:12px;box-sizing:border-box;border:1px solid var(--alt-estrutura);border-radius:50%;background:transparent}
+.se-alternativa-1 .se-pip.cheio{background:transparent}
+.se-alternativa-1 .se-pip.cheio::before{background:var(--alt-texto);border-color:var(--alt-texto)}
+.se-alternativa-1 .se-alt-critico{border-color:var(--alt-destaque);border-left-width:3px}
+.se-alternativa-1 .se-alt-critico .se-pip.cheio::before{background:var(--alt-destaque);border-color:var(--alt-estrutura)}
+.se-alternativa-1 .se-alt-aviso{color:var(--alt-texto);font-size:14px;font-weight:600}
+
+.se-alternativa-1 :is(.se-derivados span,.se-dica,.se-vazio,.se-pericias-topo .se-dica){font-size:14px;line-height:1.35}
+.se-alternativa-1 .se-pericias-topo{align-items:flex-start;flex-direction:column;gap:6px;margin-bottom:8px}
+.se-alternativa-1 .se-pericias-colunas{gap:12px}
+.se-alternativa-1 .se-grupo{padding:10px;border-color:var(--alt-divisor);border-radius:4px;background:none}
+.se-alternativa-1 .se-grupo h4{font-size:16px;padding-bottom:6px;margin-bottom:4px}
+.se-alternativa-1 .se-pericia{grid-template-columns:28px minmax(0,1fr) 40px 36px;gap:8px;min-height:28px;padding:2px 0;border-radius:4px}
+.se-alternativa-1 .se-pericia:hover{background:var(--alt-superficie)}
+.se-alternativa-1 .se-pericia-nome{font-size:16px;line-height:1.35;color:var(--alt-texto);min-height:24px}
+.se-alternativa-1 .se-pericia-nome:hover{text-decoration:underline;color:var(--alt-texto)}
+.se-alternativa-1 .se-attr,.se-alternativa-1 .se-pericia select{font-size:14px;color:var(--alt-secundario);text-align:center;height:26px}
+.se-alternativa-1 .se-total{font:600 16px/1.35 var(--se-fonte-texto)}
+.se-alternativa-1 .se-grau{min-height:24px;align-items:center}
+.se-alternativa-1 .se-grau span.on{background:var(--alt-estrutura)}
+.se-alternativa-1 :is(.se-painel,.se-botao,.se-linha-item){border-radius:4px;box-shadow:none}
+.se-alternativa-1 .se-retrato.pequeno{width:64px;height:64px}
+.se-alternativa-1 .se-resumo-chip{background:var(--alt-superficie);border:1px solid var(--alt-divisor);box-shadow:none;border-radius:4px}
+.se-alternativa-1 .se-barra-nome strong{font:600 20px/1.35 var(--se-fonte-texto)}
+
+/* Navegação horizontal em lateral própria; todas as abas de expansões continuam roláveis. */
+.se-alternativa-1 .se-abas-lateral{flex:0 0 136px;padding:16px 8px;gap:6px;border-left:1px solid var(--alt-divisor);background:var(--alt-fundo);overflow-y:auto}
+.se-alternativa-1 .se-abas-lateral button{writing-mode:horizontal-tb;text-orientation:mixed;min-height:40px;padding:8px 10px;font:600 16px/1.35 var(--se-fonte-texto);letter-spacing:0;text-transform:none;text-align:left;white-space:normal;border:0;border-left:3px solid transparent;border-radius:4px;box-shadow:none;color:var(--alt-secundario)}
+.se-alternativa-1 .se-abas-lateral button.ativa{background:var(--alt-superficie);color:var(--alt-texto);border-left-color:var(--alt-estrutura);margin:0;box-shadow:none}
+.se-alternativa-1 .se-abas-lateral button:hover{background:var(--alt-superficie);color:var(--alt-texto)}
+
+/* Menos colunas ao estreitar a janela, sem reduzir o tamanho dos controles. */
+.se-alternativa-1 .se-corpo{container-type:inline-size;container-name:se-alternativa-corpo}
+@container se-alternativa-corpo (max-width:800px){
+ .se-alternativa-1 .se-pericias-colunas{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@container se-alternativa-corpo (max-width:540px){
+ .se-alternativa-1 .se-pericias-colunas{grid-template-columns:1fr}
+ .se-alternativa-1 .se-secundarios{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .se-alternativa-1 .se-recursos{grid-template-columns:1fr}
+}
+
+
+/* Legendas antes herdadas do tamanho compacto da Clássica. */
+.se-alternativa-1 label{font-size:14px;line-height:1.4}
+.se-alternativa-1 :is(.se-form,.se-carga) label{font-size:14px}
+.se-alternativa-1 :is(small,.se-barra-nome span,.se-turno-rotulo){font-size:14px;line-height:1.4;font-style:normal;color:var(--alt-secundario)}
+.se-alternativa-1 :is(.se-painel,.se-form) .se-dica{font-size:14px;line-height:1.5}
+.se-alternativa-1 .se-painel h3{font-size:18px}
+.se-alternativa-1 .se-botao{font-size:16px;min-height:32px;line-height:1.35}
+.se-alternativa-1 .se-botao.pequeno{font-size:14px;min-height:28px}
+.se-alternativa-1 .se-resumo{gap:8px;justify-content:flex-start;min-width:0}
+.se-alternativa-1 .se-barra-compacta{grid-template-columns:64px minmax(160px,1fr);gap:12px 16px}
+.se-alternativa-1 .se-resumo{grid-column:1 / -1}
+.se-alternativa-1 .se-resumo-chip{padding:8px 10px;gap:6px;min-width:104px}
+.se-alternativa-1 button.se-resumo-nome{font:600 14px/1.35 var(--se-fonte-texto);letter-spacing:0;text-transform:none;color:var(--alt-texto)}
+.se-alternativa-1 .se-resumo-chip strong{font:600 20px/1.35 var(--se-fonte-texto);min-width:48px}
+.se-alternativa-1 .se-resumo-chip strong small{font:400 14px/1.35 var(--se-fonte-texto);margin-left:4px}
+.se-alternativa-1 .se-resumo-chip .se-icone{width:28px;height:28px;font-size:18px}
+.se-alternativa-1 .se-estat span{font:600 14px/1.35 var(--se-fonte-texto);letter-spacing:0}
+.se-alternativa-1 .se-ornamento-topo em{font-size:12px;letter-spacing:.08em}
+
+/* Leitura da mochila: título e instruções com tamanho de texto principal. */
+.se-alternativa-1 .se-carga-topo label{font-size:18px;font-weight:600;gap:6px}
+.se-alternativa-1 .se-carga-topo select{font-size:16px;min-height:36px;padding:4px 10px;font-weight:400}
+.se-alternativa-1 .se-inventario .se-painel > .se-dica{font-size:16px;line-height:1.5;margin-block:8px 0}
+.se-alternativa-1 .se-inventario .se-vazio{font-size:16px;line-height:1.5}
+
+/* Cabeçalho das abas secundárias: cartões baixos, sem reduzir a leitura. */
+.se-alternativa-1 .se-resumo-chip{padding:4px 8px;gap:2px}
+.se-alternativa-1 .se-resumo-chip strong{font-size:18px;line-height:1.3}
+.se-alternativa-1 .se-resumo-chip .se-icone{width:26px;height:26px;font-size:17px}
+
+/* Ajuste final de títulos e espaço útil para as siglas dos seletores. */
+.se-alternativa-1 .se-pericias-topo h3{font-size:20px;font-weight:600;line-height:1.35}
+.se-alternativa-1 .se-grupo h4{font-size:18px;line-height:1.35}
+.se-alternativa-1 .se-pericias-topo .se-dica{font-size:16px;line-height:1.5}
+.se-alternativa-1 .se-pericia{grid-template-columns:28px minmax(0,1fr) 72px 36px}
+.se-alternativa-1 .se-pericia select{box-sizing:border-box;width:72px;min-width:72px;max-width:none;height:32px;appearance:none!important;-webkit-appearance:none!important;padding:3px 24px 3px 8px!important;text-align:left;text-indent:0;text-overflow:clip;font:600 14px/1.35 var(--se-fonte-texto);letter-spacing:0;color:var(--alt-texto);background-color:var(--alt-superficie);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='m2 2 4 4 4-4' fill='none' stroke='%23e7e8e5' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")!important;background-size:12px 8px;background-repeat:no-repeat;background-position:right 8px center}
+.se-alternativa-1 .se-pericia select option{color:var(--alt-texto);background:var(--alt-superficie)}
+.se-alternativa-1 .se-attr{font-size:14px;letter-spacing:0}
+.se-alternativa-1 .se-pe{gap:24px;align-items:flex-start;flex-wrap:wrap}
+.se-alternativa-1 .se-pe label{font-size:18px;line-height:1.4;font-weight:600;gap:6px}
+.se-alternativa-1 .se-pe label input{font-size:20px;min-height:36px}
+.se-alternativa-1 .se-pe > div > span{font:400 16px/1.5 var(--se-fonte-texto);color:var(--alt-secundario)}
+.se-alternativa-1 .se-pe > div > strong{font-size:22px;line-height:1.4}
+.se-alternativa-1 .se-habilidades > .se-painel > .se-dica{font-size:16px;line-height:1.5}
+.se-alternativa-1 .se-derivados span{font-size:16px;line-height:1.4}
+.se-alternativa-1 .se-derivados strong{font:600 20px/1.35 var(--se-fonte-texto)}
+
+
+/* Títulos de PE com tipografia e alinhamento iguais. */
+.se-alternativa-1 .se-pe label,.se-alternativa-1 .se-pe .se-pe-titulo{font:600 18px/1.4 var(--se-fonte-texto);font-style:normal;color:var(--alt-texto)}
+.se-alternativa-1 .se-pe .se-pe-investidos{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.se-alternativa-1 .se-pe .se-pe-investidos strong{display:flex;align-items:center;min-height:36px;margin:0;font:600 20px/1.35 var(--se-fonte-texto);color:var(--alt-texto)}
+.se-alternativa-1 .se-pe .se-pe-investidos small{font:400 14px/1.4 var(--se-fonte-texto);color:var(--alt-secundario)}

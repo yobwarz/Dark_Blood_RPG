@@ -1,0 +1,12 @@
+<section class="se-painel se-drs"><h3>Saúde e atendimento</h3>
+<p>{{#if morto}}Morte registrada{{else}}{{#if estavel}}Estabilizado{{else}}Sem estabilização registrada{{/if}}{{/if}} · {{#if tratando}}Atendimento contínuo em andamento{{else}}Sem atendimento contínuo{{/if}}</p>
+<div class="se-botoes"><button type="button" data-action="extensao" data-ext="drs-saude" data-acao="executar" data-drs="contencao">Configurar Contido</button>
+{{#if base}}<button type="button" data-action="extensao" data-ext="drs-saude" data-acao="executar" data-drs="descontaminar">Iniciar / concluir descontaminação</button><button type="button" data-action="extensao" data-ext="drs-saude" data-acao="executar" data-drs="infeccao">Resolver hora de Infecção</button>{{/if}}
+{{#if gm}}<button type="button" data-action="extensao" data-ext="drs-saude" data-acao="executar" data-drs="intoxicacao">Resolver hora de Intoxicação</button>
+<button type="button" data-action="extensao" data-ext="drs-saude" data-acao="executar" data-drs="estabilizar">Estabilizar · Medicina</button>
+<button type="button" data-action="extensao" data-ext="drs-saude" data-acao="executar" data-drs="critico">Resolver intervalo do Ferimento Crítico</button>
+{{#if tratando}}<button type="button" data-action="extensao" data-ext="drs-saude" data-acao="executar" data-drs="concluir">Concluir atendimento</button><button type="button" data-action="extensao" data-ext="drs-saude" data-acao="executar" data-drs="interromper">Interromper atendimento</button>
+{{else}}<button type="button" data-action="extensao" data-ext="drs-saude" data-acao="executar" data-drs="iniciar">Atender Ferimento Crítico</button>{{/if}}
+{{#if reanimacao}}{{#unless reanimacaoResolvida}}<button type="button" data-action="extensao" data-ext="drs-saude" data-acao="executar" data-drs="reanimar">Confirmar reanimação</button>{{/unless}}{{/if}}
+<button type="button" data-action="extensao" data-ext="drs-saude" data-acao="executar" data-drs="substituto">Personagem substituto · {{referencia}} PE</button>
+{{/if}}</div><p class="se-nota">O Mestre avança o relógio do mundo. Cada clique resolve um intervalo vencido. Atendimento contínuo suspende o dano crítico, sem estabilizar ou recuperar PV; confirme seus recursos e interrupções.</p></section>

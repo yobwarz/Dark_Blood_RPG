@@ -1,0 +1,660 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=IM+Fell+English&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap");
+
+/* ============================================================
+   SANGUE ESCURO: dark fantasy, plaquetas em creme, detalhes dourados.
+   Todas as cores vêm de variáveis e podem ser editadas em hexadecimal
+   (Configurações do Jogo → Configurar Sistema → Cores da ficha).
+   ============================================================ */
+
+:root {
+  --se-fundo: #17110e;
+  --se-brilho: #4a1d17;
+  --se-painel: #241c17;
+  --se-texto: #e8dcc2;
+  --se-texto-fraco: #a39580;
+  --se-detalhe: #b89a5b;
+  --se-destaque: #9a2323;
+  --se-creme: #eadbb8;
+  --se-creme-texto: #2a1c12;
+  --se-pip: #eadbb8;
+  --se-fonte-titulo: "Cinzel", "Palatino Linotype", Georgia, serif;
+  --se-fonte-texto: "Spectral", Georgia, "Times New Roman", serif;
+  --se-fonte-escrita: "IM Fell English", Georgia, serif;
+}
+
+.sangue-escuro {
+  --se-linha: color-mix(in srgb, var(--se-detalhe) 40%, transparent);
+  --se-linha-fraca: color-mix(in srgb, var(--se-detalhe) 22%, transparent);
+  --se-vidro: color-mix(in srgb, var(--se-painel) 70%, transparent);
+  --se-vivo: color-mix(in srgb, var(--se-destaque) 60%, var(--se-texto));
+  font-family: var(--se-fonte-texto);
+  color: var(--se-texto);
+}
+
+/* ---------- moldura ---------- */
+.application.sangue-escuro {
+  background:
+    radial-gradient(ellipse 80% 55% at 70% -8%, var(--se-brilho), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--se-fundo) 88%, #fff 4%), var(--se-fundo)) !important;
+  border: 1px solid var(--se-linha);
+  border-radius: 6px;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.85);
+}
+.application.sangue-escuro .window-header {
+  background: transparent; border-bottom: 0; color: var(--se-texto);
+  font-family: var(--se-fonte-titulo); letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.85rem;
+}
+.application.sangue-escuro .window-content { padding: 0; background: transparent; overflow: hidden; }
+.sangue-escuro .window-header button, .sangue-escuro .window-header a { color: var(--se-texto-fraco); }
+
+.sangue-escuro .se-ficha {
+  display: flex; flex: 1 1 auto; min-height: 0; font-size: 0.95rem; line-height: 1.5;
+}
+/* ficha principal: corpo rolável + abas laterais */
+.sangue-escuro .se-paginada { flex-direction: row; }
+.sangue-escuro .se-corpo {
+  flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px;
+  padding: 0 16px 14px 22px; overflow-y: auto; overflow-x: hidden;
+}
+.sangue-escuro .se-corpo > * { flex: none; }
+/* fichas simples (criatura e item): uma coluna rolável */
+.sangue-escuro .se-simples {
+  flex-direction: column; gap: 10px; padding: 0 20px 14px; overflow-y: auto; overflow-x: hidden;
+}
+.sangue-escuro .se-simples > * { flex: none; }
+
+/* ---------- abas laterais ---------- */
+.sangue-escuro .se-abas-lateral {
+  flex: 0 0 42px; display: flex; flex-direction: column; gap: 6px; padding: 54px 0 14px;
+  border-left: 1px solid var(--se-linha); background: color-mix(in srgb, var(--se-fundo) 60%, transparent);
+}
+.sangue-escuro .se-abas-lateral button {
+  writing-mode: vertical-rl; text-orientation: mixed; min-height: 0; padding: 14px 8px; margin-right: 0;
+  background: transparent; border: 1px solid transparent; border-right: 0; border-radius: 10px 0 0 10px;
+  color: var(--se-detalhe); font-family: var(--se-fonte-titulo); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+  line-height: 1; text-align: center;
+}
+.sangue-escuro .se-abas-lateral button:hover { color: var(--se-texto); }
+.sangue-escuro .se-abas-lateral button.ativa {
+  background: var(--se-creme); color: var(--se-creme-texto); border-color: var(--se-detalhe);
+  margin-left: -1px; box-shadow: -3px 0 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- campos genéricos ---------- */
+.sangue-escuro input[type="text"], .sangue-escuro input[type="number"],
+.sangue-escuro select, .sangue-escuro textarea {
+  background: rgba(0, 0, 0, 0.35); border: 1px solid transparent; border-bottom: 1px solid var(--se-linha);
+  border-radius: 2px; color: var(--se-texto); font-family: var(--se-fonte-texto); font-size: 0.95rem; box-shadow: none;
+}
+.sangue-escuro select option { background: var(--se-fundo); color: var(--se-texto); }
+.sangue-escuro textarea { width: 100%; resize: vertical; border: 1px solid var(--se-linha); padding: 6px 8px; }
+.sangue-escuro input:focus, .sangue-escuro select:focus, .sangue-escuro textarea:focus {
+  outline: 2px solid var(--se-detalhe); outline-offset: 1px; border-color: var(--se-detalhe);
+}
+.sangue-escuro label { display: flex; flex-direction: column; gap: 2px; font-size: 0.8rem; color: var(--se-texto-fraco); font-style: italic; }
+.sangue-escuro label input, .sangue-escuro label select { font-style: normal; }
+
+.sangue-escuro button { font-family: var(--se-fonte-texto); cursor: pointer; }
+.sangue-escuro button:focus-visible { outline: 2px solid var(--se-detalhe); outline-offset: 2px; }
+.sangue-escuro .se-botao {
+  background: var(--se-vidro); border: 1px solid var(--se-linha); color: var(--se-texto);
+  padding: 4px 12px; border-radius: 14px; font-size: 0.88rem; transition: background 0.15s, border-color 0.15s;
+}
+.sangue-escuro .se-botao:hover { background: var(--se-destaque); border-color: var(--se-detalhe); }
+.sangue-escuro .se-botao.ativo { background: var(--se-destaque); border-color: var(--se-detalhe); }
+.sangue-escuro .se-botao.perigo { border-color: var(--se-vivo); }
+.sangue-escuro .se-botao.pequeno { padding: 1px 10px; font-size: 0.8rem; }
+.sangue-escuro .se-icone {
+  background: transparent; border: 1px solid transparent; color: var(--se-texto-fraco);
+  width: 26px; height: 26px; padding: 0; line-height: 1; border-radius: 50%;
+}
+.sangue-escuro .se-icone:hover { color: var(--se-texto); border-color: var(--se-linha); }
+.sangue-escuro .se-icone.ativo { color: var(--se-detalhe); }
+
+/* ---------- ornamentos ---------- */
+.sangue-escuro .se-ornamento-topo, .sangue-escuro .se-divisor {
+  display: flex; align-items: center; gap: 6px; color: var(--se-detalhe);
+}
+.sangue-escuro .se-ornamento-topo { margin-top: 2px; }
+.sangue-escuro .se-ornamento-topo em {
+  font-style: normal; font-family: var(--se-fonte-titulo); font-size: 0.68rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--se-texto); white-space: nowrap; padding: 0 8px;
+}
+.sangue-escuro .se-ornamento-topo .fio, .sangue-escuro .se-divisor span { flex: 1; height: 1px; background: var(--se-detalhe); opacity: 0.8; }
+.sangue-escuro .se-ornamento-topo i, .sangue-escuro .se-divisor i {
+  width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--se-detalhe); flex: none;
+}
+.sangue-escuro .se-ornamento-topo i.grande, .sangue-escuro .se-divisor i.grande {
+  width: 20px; height: 20px; background: var(--se-detalhe); box-shadow: 0 0 0 3px var(--se-fundo), 0 0 0 4px var(--se-detalhe);
+}
+
+.sangue-escuro .se-marca { display: flex; flex-direction: column; align-items: center; line-height: 1; margin: 0; }
+.sangue-escuro .se-marca-titulo {
+  font-family: var(--se-fonte-titulo); font-size: 1.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--se-detalhe); text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+.sangue-escuro .se-marca-titulo b { color: var(--se-destaque); font-weight: 400; padding: 0 0.1em; }
+.sangue-escuro .se-marca-sub { font-family: var(--se-fonte-titulo); font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--se-texto-fraco); margin-top: 4px; }
+
+/* ---------- palco: identidade + roda ---------- */
+.sangue-escuro .se-palco { display: grid; grid-template-columns: minmax(0, 1fr) 470px; gap: 6px; align-items: center; margin-top: -6px; }
+.sangue-escuro .se-identidade-bloco { display: grid; grid-template-columns: 130px 1fr; align-items: center; gap: 0; }
+
+.sangue-escuro .se-retrato {
+  position: relative; z-index: 2; width: 130px; height: 130px; padding: 0; min-height: 0; border: 0; border-radius: 50%;
+  background: var(--se-fundo);
+  box-shadow: 0 0 0 5px var(--se-fundo), 0 0 0 8px var(--se-detalhe), 0 0 0 10px var(--se-fundo), 0 0 22px rgba(0, 0, 0, 0.7);
+}
+.sangue-escuro .se-retrato.pequeno { width: 64px; height: 64px; box-shadow: 0 0 0 3px var(--se-fundo), 0 0 0 5px var(--se-detalhe); }
+.sangue-escuro .se-retrato img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 0; filter: saturate(0.85) contrast(1.05); }
+
+/* plaquetas creme com aba de rótulo */
+.sangue-escuro .se-pilulas { display: flex; flex-direction: column; gap: 18px; margin-left: -34px; padding-top: 8px; }
+.sangue-escuro .se-pilula {
+  position: relative; display: block; height: 38px; padding-left: 44px;
+  background: var(--se-creme); border: 3px solid var(--se-detalhe); border-radius: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.55); font-style: normal;
+}
+.sangue-escuro .se-pilula-rotulo {
+  position: absolute; left: 50%; top: -15px; transform: translateX(-30%); min-width: 96px; text-align: center;
+  background: var(--se-creme); color: var(--se-creme-texto); border: 3px solid var(--se-detalhe); border-bottom: 0;
+  border-radius: 14px 14px 0 0; padding: 0 12px; height: 14px; line-height: 12px;
+  font-family: var(--se-fonte-titulo); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.sangue-escuro .se-pilula input {
+  width: 100%; height: 100%; background: transparent !important; border: 0 !important; color: var(--se-creme-texto) !important;
+  text-align: center; font-family: var(--se-fonte-escrita); font-size: 1.05rem; padding: 6px 12px 0 0;
+}
+.sangue-escuro .se-pilula input::placeholder { color: color-mix(in srgb, var(--se-creme-texto) 45%, transparent); }
+.sangue-escuro .se-pilula input:focus { outline: 2px solid var(--se-destaque); outline-offset: 0; border-radius: 16px; }
+
+.sangue-escuro .se-pe-selo {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; margin-left: 12px; width: 84px; padding: 4px 6px 8px;
+  background: var(--se-creme); color: var(--se-creme-texto); border: 3px solid var(--se-detalhe); border-radius: 10px 10px 30px 30px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.55); line-height: 1.1;
+}
+.sangue-escuro .se-pe-selo span { font-family: var(--se-fonte-titulo); font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.sangue-escuro .se-pe-selo small { font-family: var(--se-fonte-titulo); font-size: 0.6rem; }
+.sangue-escuro .se-pe-selo input {
+  width: 100%; text-align: center; background: transparent !important; border: 0 !important; color: var(--se-creme-texto) !important;
+  font-family: var(--se-fonte-titulo); font-size: 1.9rem; font-weight: 600; height: 40px;
+}
+
+/* ---------- roda de atributos ---------- */
+.sangue-escuro .se-roda { position: relative; width: 470px; height: 250px; }
+.sangue-escuro .se-roda-arte { position: absolute; left: 50%; top: 50%; width: 196px; height: 196px; transform: translate(-50%, -50%); overflow: visible; }
+.sangue-escuro .se-roda-arte .anel { fill: none; stroke: var(--se-detalhe); stroke-width: 1; opacity: 0.85; }
+.sangue-escuro .se-roda-arte .anel.fino { opacity: 0.35; }
+.sangue-escuro .se-roda-arte .arco { fill: var(--se-detalhe); font-family: var(--se-fonte-titulo); font-size: 10px; }
+.sangue-escuro .se-roda-arte .gota path:first-child { fill: var(--se-destaque); stroke: var(--se-detalhe); stroke-width: 1.2; }
+.sangue-escuro .se-roda-arte .gota .veio { fill: none; stroke: var(--se-detalhe); stroke-width: 1; opacity: 0.8; }
+.sangue-escuro .se-roda-arte .raios path { fill: color-mix(in srgb, var(--se-detalhe) 30%, transparent); stroke: var(--se-detalhe); stroke-width: 0.8; }
+
+.sangue-escuro .se-no { position: absolute; transform: translate(-50%, -50%); }
+.sangue-escuro .se-no-circulo {
+  position: relative; width: 46px; height: 46px; border-radius: 50%; background: var(--se-creme);
+  border: 3px solid var(--se-detalhe); box-shadow: 0 0 0 3px var(--se-fundo), 0 3px 8px rgba(0, 0, 0, 0.6);
+}
+.sangue-escuro .se-no-circulo input {
+  width: 100%; height: 100%; text-align: center; background: transparent !important; border: 0 !important; padding: 0;
+  color: var(--se-creme-texto) !important; font-family: var(--se-fonte-titulo); font-size: 1.3rem; font-weight: 600;
+  -moz-appearance: textfield; appearance: textfield;
+}
+.sangue-escuro .se-no-circulo input::-webkit-inner-spin-button { display: none; }
+.sangue-escuro .se-no-circulo input:focus { outline: 2px solid var(--se-destaque); border-radius: 50%; }
+.sangue-escuro .se-no-mod {
+  position: absolute; right: -16px; bottom: -9px; min-width: 22px; height: 20px; padding: 0 3px; border-radius: 10px;
+  background: var(--se-fundo); border: 2px solid var(--se-detalhe); color: var(--se-texto);
+  font-family: var(--se-fonte-titulo); font-size: 0.66rem; display: flex; align-items: center; justify-content: center;
+}
+.sangue-escuro .se-no-rotulo {
+  position: absolute; white-space: nowrap; background: none; border: 0; padding: 0;
+  font-family: var(--se-fonte-titulo); font-size: 0.85rem; min-height: 0; color: var(--se-detalhe); text-shadow: 0 1px 4px #000;
+}
+.sangue-escuro .se-no-rotulo:hover { color: var(--se-texto); }
+.sangue-escuro .lado-esq .se-no-rotulo { right: calc(100% + 12px); top: 50%; transform: translateY(-50%); }
+.sangue-escuro .lado-dir .se-no-rotulo { left: calc(100% + 12px); top: 50%; transform: translateY(-50%); }
+.sangue-escuro .lado-cima .se-no-rotulo { bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); }
+.sangue-escuro .lado-baixo .se-no-rotulo { top: calc(100% + 8px); left: 50%; transform: translateX(-50%); }
+
+/* ---------- recursos ---------- */
+.sangue-escuro .se-recursos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 0; }
+.sangue-escuro .se-secundarios { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.sangue-escuro .se-recurso { display: flex; flex-direction: column; gap: 3px; }
+.sangue-escuro .se-recurso-pilula {
+  display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 4px 0 14px;
+  background: var(--se-fundo); border: 2px solid var(--se-detalhe); border-radius: 18px;
+  box-shadow: inset 0 0 0 2px var(--se-fundo), 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+.sangue-escuro .se-recurso-nome { flex: none; font-family: var(--se-fonte-titulo); font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--se-texto); white-space: nowrap; }
+.sangue-escuro .se-recurso-max { color: var(--se-detalhe); font-family: var(--se-fonte-titulo); }
+.sangue-escuro .se-recurso-max input { width: 34px; text-align: right; background: transparent; border: 0; color: var(--se-detalhe); font-family: var(--se-fonte-titulo); font-size: 0.95rem; padding: 0; }
+.sangue-escuro .se-recurso-valor { width: 26px; height: 26px; border-radius: 50%; background: var(--se-creme); border: 2px solid var(--se-detalhe); flex: none; }
+.sangue-escuro .se-recurso-valor input {
+  width: 100%; height: 100%; text-align: center; background: transparent !important; border: 0 !important; padding: 0;
+  color: var(--se-creme-texto) !important; font-family: var(--se-fonte-titulo); font-size: 1rem; font-weight: 600; -moz-appearance: textfield; appearance: textfield;
+}
+.sangue-escuro .se-recurso-valor input::-webkit-inner-spin-button { display: none; }
+.sangue-escuro .se-recurso-menor .se-recurso-pilula { height: 28px; }
+.sangue-escuro .se-recurso-menor .se-recurso-valor { width: 26px; height: 26px; }
+.sangue-escuro .se-recurso-dica { flex: 1 1 0; min-width: 0; font-size: 0.68rem; font-style: italic; color: var(--se-texto-fraco); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: right; padding-right: 4px; }
+
+.sangue-escuro .se-pips { display: flex; gap: 4px; flex-wrap: wrap; padding-left: 4px; }
+.sangue-escuro .se-pip {
+  flex: none; box-sizing: border-box; width: 13px; height: 13px; min-width: 0; min-height: 0; aspect-ratio: 1 / 1;
+  padding: 0; margin: 0; line-height: 0; border-radius: 50%; background: transparent;
+  border: 1.5px solid var(--se-pip); transition: background 0.12s;
+}
+.sangue-escuro .se-pip:hover { border-color: var(--se-detalhe); }
+.sangue-escuro .se-pip.cheio { background: var(--se-pip); }
+
+/* ---------- derivados ---------- */
+.sangue-escuro .se-derivados { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 2px 0; }
+.sangue-escuro .se-derivados > div { flex: 1 1 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.sangue-escuro .se-derivados span { font-size: 0.72rem; font-style: italic; color: var(--se-texto-fraco); }
+.sangue-escuro .se-derivados strong { font-family: var(--se-fonte-titulo); font-weight: 400; font-size: 1.1rem; line-height: 1.2; color: var(--se-detalhe); }
+.sangue-escuro .se-derivados input { width: 60px; text-align: center; }
+.sangue-escuro .se-derivados .se-botao { align-self: center; }
+
+/* ---------- abas ---------- */
+.sangue-escuro .se-abas {
+  display: flex; gap: 6px; border-bottom: 1px solid var(--se-linha); padding: 6px 4px 0; margin-top: 2px;
+  position: sticky; top: 0; z-index: 10; background: var(--se-fundo);
+}
+.sangue-escuro .se-abas button {
+  background: transparent; border: 0; border-radius: 6px 6px 0 0; color: var(--se-detalhe);
+  font-family: var(--se-fonte-titulo); font-size: 0.82rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 5px 16px;
+}
+.sangue-escuro .se-abas button:hover { color: var(--se-texto); }
+.sangue-escuro .se-abas button.ativa { background: var(--se-creme); color: var(--se-creme-texto); box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4); }
+
+.sangue-escuro .se-aba-conteudo { padding: 4px 2px 12px; }
+.sangue-escuro .se-aba-conteudo > div { display: flex; flex-direction: column; gap: 10px; }
+
+/* ---------- cabeçalho simples (criatura e item) ---------- */
+.sangue-escuro .se-cabecalho { display: grid; grid-template-columns: 96px 1fr auto; gap: 14px; align-items: center; padding: 14px 0 10px; border-bottom: 1px solid var(--se-linha); }
+.sangue-escuro .se-cabecalho-item { grid-template-columns: 64px 1fr; }
+.sangue-escuro .se-nome {
+  font-family: var(--se-fonte-escrita) !important; font-size: 1.8rem !important; height: auto !important; background: transparent !important;
+  border-bottom: 1px dashed var(--se-linha) !important; color: var(--se-texto) !important; padding: 0 2px;
+}
+.sangue-escuro .se-linha-bio { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+.sangue-escuro .se-linha-bio label { flex: 1 1 130px; }
+.sangue-escuro .se-linha-bio label.curto { flex: 0 0 64px; }
+.sangue-escuro .se-vitais { display: flex; flex-direction: column; gap: 8px; }
+.sangue-escuro .se-vital { border: 2px solid var(--se-detalhe); background: var(--se-fundo); border-radius: 14px; padding: 4px 12px; min-width: 170px; }
+.sangue-escuro .se-vital-nome { display: block; font-family: var(--se-fonte-titulo); font-size: 0.72rem; text-transform: uppercase; color: var(--se-texto-fraco); }
+.sangue-escuro .se-vital-corpo { display: flex; align-items: center; gap: 4px; }
+.sangue-escuro .se-vital-corpo input { width: 44px; text-align: center; font-size: 1.2rem; font-family: var(--se-fonte-titulo); }
+.sangue-escuro .se-vital-corpo .barra { display: flex; align-items: center; color: var(--se-texto-fraco); }
+.sangue-escuro .se-vital-corpo .barra input { width: 36px; font-size: 0.95rem; }
+
+/* ---------- painéis ---------- */
+.sangue-escuro .se-painel {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--se-linha);
+  border-radius: 3px;
+  padding: 8px 12px 10px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.sangue-escuro h3 {
+  font-family: var(--se-fonte-titulo); font-weight: 400; font-size: 1.15rem; color: var(--se-detalhe);
+  margin: 0; border: 0; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.sangue-escuro .se-novo { display: flex; gap: 4px; }
+.sangue-escuro .se-dica { margin: 0; font-size: 0.8rem; font-style: italic; color: var(--se-texto-fraco); }
+.sangue-escuro .se-vazio { margin: 4px 0; font-style: italic; color: var(--se-texto-fraco); }
+
+/* ---------- perícias (página principal) ---------- */
+.sangue-escuro .se-pericias { display: flex; flex-direction: column; gap: 4px; }
+.sangue-escuro .se-pericias-topo { display: flex; align-items: baseline; gap: 12px; }
+.sangue-escuro .se-pericias-topo .se-dica { font-size: 0.72rem; }
+.sangue-escuro .se-pericias-colunas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-items: start; }
+.sangue-escuro .se-coluna { display: flex; flex-direction: column; gap: 8px; }
+.sangue-escuro .se-grupo { background: rgba(0, 0, 0, 0.22); border: 1px solid var(--se-linha); border-radius: 3px; padding: 3px 8px 5px; }
+.sangue-escuro h4 {
+  margin: 0 0 2px; font-family: var(--se-fonte-titulo); font-weight: 400; font-size: 0.78rem; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--se-detalhe); border-bottom: 1px solid var(--se-linha-fraca);
+}
+.sangue-escuro .se-pericia { display: grid; grid-template-columns: 30px 1fr 52px 32px; align-items: center; gap: 4px; line-height: 1.25; }
+.sangue-escuro .se-pericia select { height: 20px; font-size: 0.75rem; padding: 0 2px; min-height: 0; }
+.sangue-escuro .se-attr { font-size: 0.72rem; color: var(--se-texto-fraco); text-align: center; }
+.sangue-escuro .se-total { font-family: var(--se-fonte-titulo); font-weight: 400; font-size: 1rem; text-align: right; }
+.sangue-escuro .se-pericia-nome { background: none; border: 0; text-align: left; color: var(--se-texto); font-size: 0.88rem; padding: 0; min-height: 0; line-height: 1.25; }
+.sangue-escuro .se-pericia-nome:hover { color: var(--se-vivo); }
+.sangue-escuro .se-pericia.grau-2 .se-pericia-nome { color: var(--se-detalhe); }
+.sangue-escuro .se-grau { background: none; border: 0; padding: 2px; display: flex; gap: 3px; min-height: 0; }
+.sangue-escuro .se-grau span { width: 9px; height: 9px; transform: rotate(45deg); border: 1px solid var(--se-texto-fraco); }
+.sangue-escuro .se-grau span.on { background: var(--se-detalhe); border-color: var(--se-detalhe); }
+
+/* ---------- linhas de item ---------- */
+.sangue-escuro .se-linha-item {
+  display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center;
+  padding: 4px 6px; border-bottom: 1px solid rgba(165, 138, 82, 0.15);
+}
+.sangue-escuro .se-linha-item.destaque { background: rgba(142, 27, 27, 0.18); border-left: 3px solid var(--se-destaque); }
+.sangue-escuro .se-linha-item img { width: 32px; height: 32px; object-fit: cover; border: 1px solid var(--se-linha); border-radius: 2px; }
+.sangue-escuro .se-item-info { display: flex; flex-direction: column; line-height: 1.25; }
+.sangue-escuro .se-item-info small { color: var(--se-texto-fraco); }
+.sangue-escuro .se-item-acoes { display: flex; align-items: center; gap: 4px; }
+.sangue-escuro .se-qtd { min-width: 24px; text-align: center; font-family: var(--se-fonte-titulo); }
+
+/* ---------- combate ---------- */
+.sangue-escuro .se-botoes-grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.sangue-escuro .se-morte { display: flex; gap: 14px; align-items: end; flex-wrap: wrap; }
+.sangue-escuro .se-morte-trilha { display: flex; flex-direction: column; gap: 2px; }
+.sangue-escuro .se-morte-trilha span { font-size: 0.8rem; font-style: italic; color: var(--se-texto-fraco); }
+.sangue-escuro .se-morte-trilha input { width: 56px; text-align: center; }
+.sangue-escuro .se-morte.ativa { padding: 6px; border: 1px solid var(--se-vivo); border-radius: 3px; }
+
+/* ---------- inventário ---------- */
+.sangue-escuro .se-carga-topo { display: flex; align-items: end; justify-content: space-between; gap: 12px; }
+.sangue-escuro .se-carga-topo strong { font-family: var(--se-fonte-titulo); font-weight: 400; font-size: 1.15rem; }
+.sangue-escuro .se-carga-topo strong.excedeu { color: var(--se-vivo); }
+.sangue-escuro .se-barra-carga { height: 8px; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--se-linha); border-radius: 4px; overflow: hidden; }
+.sangue-escuro .se-barra-carga span { display: block; height: 100%; background: var(--se-detalhe); }
+.sangue-escuro .se-barra-carga.excedeu span { background: var(--se-vivo); }
+
+/* ---------- habilidades / condições / história ---------- */
+.sangue-escuro .se-pe { display: flex; gap: 24px; align-items: end; }
+.sangue-escuro .se-pe input { width: 70px; text-align: center; }
+.sangue-escuro .se-pe strong { font-family: var(--se-fonte-titulo); font-weight: 400; font-size: 1.4rem; }
+.sangue-escuro .se-pe div { display: flex; flex-direction: column; }
+.sangue-escuro .se-pe div span { font-size: 0.8rem; font-style: italic; color: var(--se-texto-fraco); }
+
+.sangue-escuro .se-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sangue-escuro .se-chip {
+  flex-direction: row; align-items: center; cursor: pointer; font-style: normal; font-size: 0.9rem; color: var(--se-texto);
+  border: 1px solid var(--se-linha); border-radius: 14px; padding: 2px 12px; background: rgba(0, 0, 0, 0.3);
+}
+.sangue-escuro .se-chip input { position: absolute; opacity: 0; pointer-events: none; }
+.sangue-escuro .se-chip:has(input:focus-visible) { outline: 2px solid var(--se-detalhe); outline-offset: 2px; }
+.sangue-escuro .se-chip.ativa { background: var(--se-destaque); border-color: var(--se-detalhe); }
+
+.sangue-escuro .se-ferimento { display: grid; grid-template-columns: 110px 1fr 2fr 28px; gap: 6px; align-items: center; }
+.sangue-escuro .se-form { gap: 8px; }
+.sangue-escuro .se-duas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sangue-escuro .se-check { flex-direction: row; align-items: center; gap: 6px; font-style: normal; color: var(--se-texto); }
+.sangue-escuro .se-ataque-criatura { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+/* ---------- mensagens de chat ---------- */
+.se-flavor h3 { font-family: "IM Fell English SC", Georgia, serif; font-weight: 400; font-size: 1.1rem; margin: 0 0 2px; border: 0; }
+.se-flavor small { display: block; opacity: 0.8; }
+.se-flavor .se-resultado { margin: 4px 0 0; font-weight: 600; }
+.se-flavor .se-resultado.ok { color: #7f9a5a; }
+.se-flavor .se-resultado.falha { color: #d4584f; }
+.se-flavor .se-nota { margin: 4px 0 0; font-style: italic; opacity: 0.9; }
+.se-flavor .se-botoes { margin-top: 6px; }
+.se-flavor .se-botoes button { width: auto; padding: 2px 12px; line-height: 1.6; }
+
+/* ---------- janelas estreitas ---------- */
+@media (max-width: 900px) {
+  .sangue-escuro .se-palco { grid-template-columns: 1fr; justify-items: center; }
+  .sangue-escuro .se-pericias-colunas { grid-template-columns: 1fr; }
+  .sangue-escuro .se-recursos { grid-template-columns: 1fr; }
+  .sangue-escuro .se-secundarios { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- janela de cores ---------- */
+.se-config .se-config-corpo { padding: 12px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+.se-config .se-config-presets { display: flex; flex-wrap: wrap; gap: 6px; }
+.se-config .se-cores { display: flex; flex-direction: column; gap: 6px; }
+.se-config .se-cor-linha { display: grid; grid-template-columns: 1fr 44px 110px; gap: 10px; align-items: center; }
+.se-config .se-cor-linha span { font-size: 0.9rem; color: var(--se-texto); }
+.se-config .se-cor-linha input[type="color"] { width: 44px; height: 28px; padding: 0; border: 1px solid var(--se-linha); background: transparent; cursor: pointer; }
+.se-config .se-config-rodape { display: flex; gap: 8px; justify-content: flex-end; margin-top: 6px; }
+
+/* ---------- atributos compactos (cabeçalho recolhido) ---------- */
+.sangue-escuro .se-atributos-mini { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; padding-top: 8px; }
+.sangue-escuro .se-mini-attr {
+  display: flex; flex-direction: column; align-items: center; gap: 0; min-height: 0; padding: 4px 2px;
+  background: var(--se-creme); color: var(--se-creme-texto); border: 3px solid var(--se-detalhe); border-radius: 14px; line-height: 1.1;
+}
+.sangue-escuro .se-mini-attr span { font-family: var(--se-fonte-titulo); font-size: 0.65rem; letter-spacing: 0.08em; }
+.sangue-escuro .se-mini-attr strong { font-family: var(--se-fonte-titulo); font-size: 1.3rem; }
+.sangue-escuro .se-mini-attr em { font-style: normal; font-family: var(--se-fonte-titulo); font-size: 0.75rem; color: var(--se-destaque); }
+.sangue-escuro .se-mini-attr:hover { border-color: var(--se-destaque); }
+
+.sangue-escuro .se-pe-chip input { width: 64px; text-align: center; font-family: var(--se-fonte-titulo); font-size: 1.1rem; color: var(--se-detalhe); }
+
+/* ---------- barra compacta das subpáginas ---------- */
+.sangue-escuro .se-barra-compacta { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding-top: 12px; }
+.sangue-escuro .se-barra-nome { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+.sangue-escuro .se-barra-nome strong { font-family: var(--se-fonte-escrita); font-weight: 400; font-size: 1.5rem; color: var(--se-texto); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sangue-escuro .se-barra-nome span { font-size: 0.8rem; font-style: italic; color: var(--se-texto-fraco); }
+.sangue-escuro .se-resumo { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.sangue-escuro .se-resumo-chip { display: flex; flex-direction: column; align-items: center; background: var(--se-fundo); border: 2px solid var(--se-detalhe); border-radius: 12px; padding: 1px 4px 2px; }
+.sangue-escuro .se-resumo-chip > span { font-family: var(--se-fonte-titulo); font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--se-texto-fraco); }
+.sangue-escuro .se-resumo-chip > div { display: flex; align-items: center; }
+.sangue-escuro .se-resumo-chip strong { font-family: var(--se-fonte-titulo); font-size: 0.95rem; min-width: 38px; text-align: center; font-weight: 400; }
+.sangue-escuro .se-resumo-chip strong small { font-size: 0.65rem; color: var(--se-texto-fraco); }
+.sangue-escuro .se-resumo-chip .se-icone { width: 20px; height: 20px; min-height: 0; font-size: 0.9rem; }
+
+/* ---------- fichas simples: criatura e item ---------- */
+.sangue-escuro .se-cabeca-simples { display: grid; grid-template-columns: 130px minmax(0, 1fr); align-items: center; padding-top: 6px; }
+.sangue-escuro .se-cabeca-simples .se-pilulas { margin-left: -24px; }
+.sangue-escuro .se-item-ficha .se-retrato, .sangue-escuro .se-criatura .se-retrato { margin-left: 4px; }
+.sangue-escuro .se-item-ficha .se-cabeca-simples { grid-template-columns: 96px minmax(0, 1fr); }
+.sangue-escuro .se-item-ficha .se-retrato { width: 96px; height: 96px; }
+.sangue-escuro .se-recursos-unico { grid-template-columns: 1fr; }
+.sangue-escuro .se-recursos-unico .se-recurso-pilula .se-icone { flex: none; }
+.sangue-escuro .se-barra-pv { height: 8px; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--se-linha); border-radius: 4px; overflow: hidden; }
+.sangue-escuro .se-barra-pv span { display: block; height: 100%; background: var(--se-destaque); }
+.sangue-escuro .se-estatisticas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.sangue-escuro .se-estat {
+  align-items: center; gap: 2px; padding: 6px 4px 8px; font-style: normal;
+  background: var(--se-creme); color: var(--se-creme-texto); border: 3px solid var(--se-detalhe); border-radius: 12px 12px 22px 22px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.55); text-align: center; line-height: 1.1;
+}
+.sangue-escuro .se-estat span { font-family: var(--se-fonte-titulo); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--se-creme-texto); }
+.sangue-escuro .se-estat input {
+  width: 100%; text-align: center; background: transparent !important; border: 0 !important; color: var(--se-creme-texto) !important;
+  font-family: var(--se-fonte-titulo); font-size: 1.7rem; font-weight: 600; height: 36px; padding: 0;
+}
+.sangue-escuro .se-tres { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.sangue-escuro .se-botoes-grade.dois { grid-template-columns: 1fr 1fr; }
+.sangue-escuro .se-aba-conteudo .se-form { margin-top: 4px; }
+
+/* ---------- defesas contra o estilo padrão de botões do Foundry (altura fixa, texto centralizado) ---------- */
+.sangue-escuro .se-abas-lateral button {
+  height: auto !important; width: auto !important; flex: 0 0 auto !important; white-space: nowrap;
+  display: block !important; box-sizing: border-box;
+}
+.sangue-escuro .se-pericia-nome {
+  height: auto !important; display: block !important; width: 100%; text-align: left !important; justify-content: flex-start !important;
+}
+.sangue-escuro .se-grau, .sangue-escuro .se-mini-attr, .sangue-escuro .se-no-rotulo { height: auto !important; }
+.sangue-escuro .se-mini-attr { display: flex !important; flex-direction: column; justify-content: center; }
+
+/* ---------- recursos clicáveis ---------- */
+.sangue-escuro button.se-recurso-nome {
+  background: none; border: 0; padding: 0; margin: 0; height: auto !important; min-height: 0; text-align: left;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+}
+.sangue-escuro button.se-recurso-nome::after { content: "▾"; font-size: 0.7em; color: var(--se-detalhe); opacity: 0.8; }
+.sangue-escuro button.se-recurso-nome:hover { color: var(--se-detalhe); }
+
+/* ---------- painel de turno ---------- */
+.sangue-escuro .se-turno-linha { display: flex; gap: 26px; align-items: center; flex-wrap: wrap; }
+.sangue-escuro .se-turno-bloco { display: flex; flex-direction: column; gap: 4px; }
+.sangue-escuro .se-turno-rotulo { font-family: var(--se-fonte-titulo); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--se-texto-fraco); }
+.sangue-escuro .se-pip.grande { width: 22px; height: 22px; border-width: 2px; }
+.sangue-escuro .se-selo-aviso {
+  font-family: var(--se-fonte-titulo); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+  background: var(--se-destaque); color: var(--se-texto); border: 1px solid var(--se-detalhe); border-radius: 12px; padding: 2px 10px;
+}
+
+.sangue-escuro button.se-resumo-nome {
+  background: none; border: 0; padding: 0; height: auto !important; min-height: 0; cursor: pointer;
+  font-family: var(--se-fonte-titulo); font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--se-texto-fraco);
+}
+.sangue-escuro button.se-resumo-nome:hover { color: var(--se-detalhe); }
+
+/* ---------- extensões (módulos de cenário) ---------- */
+.sangue-escuro .se-pagina-ext, .sangue-escuro .se-extensao { display: flex; flex-direction: column; gap: 10px; }
+.sangue-escuro .se-extensao:empty { display: none; }
+.sangue-escuro .se-aba-conteudo { display: flex; flex-direction: column; gap: 10px; }
+
+/* Navegação de extensões: rolagem independente, sem cortar as últimas abas. */
+.sangue-escuro .se-paginada { height: 100%; max-height: 100%; min-height: 0; overflow: hidden; }
+.sangue-escuro .se-abas-lateral {
+  flex-basis: 54px; min-height: 0; max-height: 100%; min-width: 0;
+  align-self: stretch; overflow-y: auto; overflow-x: hidden;
+  overscroll-behavior-y: contain; scrollbar-width: thin; scrollbar-gutter: stable;
+  scroll-padding-block: 12px; padding-top: 18px; padding-bottom: 24px;
+}
+.sangue-escuro .se-abas-lateral button { flex-shrink: 0; margin-left: 0; }
+
+/* Notas HTML das criaturas: leitura formatada e editor nativo ao editar. */
+.sangue-escuro .se-notas-formatadas { overflow-wrap: anywhere; }
+.sangue-escuro .se-notas-formatadas prose-mirror { display: block; min-height: 150px; }
+.sangue-escuro .se-notas-formatadas .editor-content { min-height: 100px; }
+.sangue-escuro .se-notas-formatadas table { width: 100%; color: var(--se-texto); }
+.sangue-escuro .se-notas-formatadas th,
+.sangue-escuro .se-notas-formatadas td { padding: 5px 8px; text-align: left; border-bottom: 1px solid var(--se-linha-fraca); }
+
+/* Texto de leitura ocupa sua altura natural; somente a edição tem área própria. */
+.sangue-escuro .se-texto-formatado { min-width: 0; }
+.sangue-escuro .se-texto-leitura {
+  height: auto !important; max-height: none !important; min-height: 0 !important;
+  overflow: visible !important; overflow-wrap: anywhere;
+}
+.sangue-escuro .se-texto-edicao,
+.sangue-escuro .se-texto-salvar,
+.sangue-escuro .se-texto-cancelar { display: none; }
+.sangue-escuro .se-texto-formatado[data-editando="true"] .se-texto-edicao { display: block; }
+.sangue-escuro .se-texto-formatado[data-editando="true"] .se-texto-salvar,
+.sangue-escuro .se-texto-formatado[data-editando="true"] .se-texto-cancelar { display: inline-block; }
+.sangue-escuro .se-texto-formatado[data-editando="true"] .se-texto-leitura,
+.sangue-escuro .se-texto-formatado[data-editando="true"] .se-texto-abrir { display: none; }
+.sangue-escuro .se-texto-acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.sangue-escuro .se-texto-acoes button { height: auto; padding: 5px 10px; color: var(--se-texto); }
+.sangue-escuro .se-texto-edicao prose-mirror { display: block; height: 320px; min-height: 240px; }
+.sangue-escuro .se-texto-leitura table { width: 100%; color: var(--se-texto); }
+
+.sangue-escuro .se-texto-acoes button { background: var(--se-vidro); border: 1px solid var(--se-linha); border-radius: 4px; }
+
+/* O ProseMirror precisa de um contêiner flexível visível ao inicializar. */
+.sangue-escuro .se-texto-edicao prose-mirror {
+  display: flex; flex-direction: column; height: 340px; min-height: 260px;
+}
+.sangue-escuro .se-texto-edicao .editor-container {
+  display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0;
+}
+.sangue-escuro .se-texto-edicao .editor-content {
+  flex: 1 1 auto; height: auto; max-height: none; min-height: 220px; overflow-y: auto;
+}
+.sangue-escuro .se-texto-edicao .ProseMirror { min-height: 220px; cursor: text; }
+
+/* Cartões do chat do sistema e expansões. Os demais tipos de mensagem mantêm o visual nativo. */
+.se-chat-card {
+  background: var(--se-fundo, #171a1d) !important;
+  color: var(--se-texto, #dce1e8);
+  border: 1px solid color-mix(in srgb, var(--se-detalhe, #a5b2c4) 48%, transparent) !important;
+  border-radius: 8px; padding: 9px 10px !important;
+  box-shadow: 0 2px 7px #0003;
+}
+.se-chat-card .message-header { color: var(--se-texto-fraco, #adb6c2); margin-bottom: 7px; }
+.se-chat-card .message-header .message-sender {
+  color: var(--se-texto, #dce1e8); font: 600 12px/1.3 system-ui, sans-serif;
+}
+.se-chat-card .message-header .message-metadata { font-size: 10px; color: var(--se-texto-fraco, #adb6c2); }
+.se-chat-card .message-header a, .se-chat-card .message-header button { color: inherit; }
+.se-chat-card .message-content { color: var(--se-texto, #dce1e8); font-family: var(--se-fonte-texto, Georgia, serif); font-size: 14px; line-height: 1.45; overflow-wrap: anywhere; }
+.se-chat-card .message-content :is(.se-flavor, .se-painel.re4) { margin: 0; padding: 0; border: 0; background: none; box-shadow: none; }
+.se-chat-card .message-content h3,
+.se-chat-card .message-header .se-flavor h3,
+.se-chat-card .se-flavor h3 {
+  font-family: var(--se-fonte-titulo, Georgia, serif); font-size: 15px !important;
+  font-weight: 600; line-height: 1.3; text-transform: none; letter-spacing: .015em;
+  color: var(--se-detalhe, #b8c6d6); margin: 0 0 8px; padding: 0 0 6px;
+  border: 0; border-bottom: 1px solid color-mix(in srgb, var(--se-detalhe, #a5b2c4) 28%, transparent);
+}
+.se-chat-card .message-content p { margin: 6px 0; line-height: 1.45; }
+.se-chat-card .message-content p:last-child { margin-bottom: 0; }
+.se-chat-card .message-content strong { font-weight: 700; color: var(--se-texto, #dce1e8); }
+.se-chat-card .message-content small { display: block; font-size: 11px; line-height: 1.5; color: var(--se-texto-fraco, #adb6c2); opacity: 1; }
+.se-chat-card .message-content .se-nota { font-size: 12px; color: var(--se-texto-fraco, #adb6c2); opacity: 1; }
+.se-chat-card .se-resultado { display: inline-block; border-radius: 4px; padding: 2px 6px; font-size: 12px; background: #ffffff09; }
+.se-chat-card .message-content .se-resultado.ok, .se-chat-card .dice-total.success { color: #a9d792; }
+.se-chat-card .message-content .se-resultado.falha, .se-chat-card .dice-total.failure { color: #f0a19b; }
+.se-chat-card .dice-roll { margin-top: 8px; }
+.se-chat-card .dice-formula {
+  background: #ffffff07; border: 1px solid #ffffff16; border-radius: 4px;
+  color: var(--se-texto-fraco, #adb6c2); padding: 4px 6px; font: 11px/1.5 ui-monospace, monospace;
+  box-shadow: none; overflow-wrap: anywhere;
+}
+.se-chat-card .dice-total {
+  background: #ffffff08; border: 1px solid color-mix(in srgb, var(--se-detalhe, #a5b2c4) 35%, transparent);
+  border-radius: 5px; margin: 4px 0 0; padding: 5px; box-shadow: none;
+  font-family: var(--se-fonte-titulo, Georgia, serif); font-size: 23px !important; line-height: 1.25;
+  color: var(--se-texto, #dce1e8);
+}
+.se-chat-card .message-content :is(.se-botoes, .se-botoes-grade) { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.se-chat-card .message-content button {
+  width: auto; max-width: 100%; height: auto !important; min-height: 28px;
+  padding: 4px 8px; margin: 0; border-radius: 4px; white-space: normal;
+  font: 12px/1.35 system-ui, sans-serif; color: var(--se-texto, #dce1e8);
+  background: #ffffff09; border: 1px solid color-mix(in srgb, var(--se-detalhe, #a5b2c4) 45%, transparent);
+}
+.se-chat-card .message-content button:hover { background: #ffffff15; box-shadow: none; }
+.se-chat-card.whisper, .se-chat-card.blind { border-style: dashed !important; }
+
+/* Ícones brancos do pacote: contraste consistente em fichas, chat e diretórios. */
+img[src*="systems/sangue-escuro/assets/icones/"],
+img[src*="modules/sangue-escuro-resident-evil-4/assets/icones/"],
+img[src*="modules/sangue-escuro-fear-and-hunger/assets/icones/"] { background-color:#000 !important; object-fit:contain !important; }
+.sangue-escuro .se-icones-acoes { display:flex;gap:0;margin:2px 0 8px; }
+.sangue-escuro.ficha-item .se-icones-acoes button {
+  flex:0 0 auto; width:auto; min-width:0; height:24px; min-height:24px;
+  padding:2px 7px; font-size:11px; line-height:1; box-sizing:border-box;
+}
+.se-galeria-icones .window-content { overflow:hidden; }
+.se-icones-painel { display:flex;flex-direction:column;min-height:0;height:100%;gap:10px; }
+.se-icones-filtros { display:flex;gap:10px; }
+.se-icones-filtros input { flex:1;min-width:80px; }
+.se-icones-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:10px;overflow-y:auto;min-height:100px;flex:1;align-content:start;padding:4px; }
+.se-icones-grid button { display:flex;flex-direction:column;height:124px;gap:6px;white-space:normal;line-height:1.2;align-items:center;padding:8px;border:1px solid #707c8c;border-radius:6px; }
+.se-icones-grid button[hidden] { display:none; }
+.se-icones-grid img { width:100%;height:78px;border:0;border-radius:4px; }
+.se-icones-grid span { font-size:12px; }
+.se-icones-grid button:hover,.se-icones-grid button:focus-visible { outline:2px solid #c9b580; }
+
+/* Biblioteca: cartões compactos só nos compêndios reconhecidos do Sangue Escuro. */
+.se-compendio-compacto {
+  height:auto !important; min-height:54px; border:1px solid #424a54; border-left:3px solid #b7aa83;
+  border-radius:5px; margin:3px 0; overflow:hidden;
+  background:linear-gradient(115deg,#232931,#12161b) !important;
+}
+.se-compendio-compacto .compendium-banner {
+  height:auto !important; min-height:50px; background-image:none !important; background-color:transparent !important;
+}
+.se-compendio-compacto img.compendium-banner { display:none; }
+.se-compendio-compacto .compendium-banner::before,
+.se-compendio-compacto .compendium-banner::after { background-image:none !important; }
+.se-compendio-compacto .compendium-name,
+.se-compendio-compacto .document-name,
+.se-compendio-compacto h3 {
+  color:#eee9df !important; font-size:13px !important; line-height:1.25 !important;
+  text-shadow:none !important; overflow-wrap:anywhere;
+}
+.directory-item.se-compendio-compacto[data-se-compendio-tipo="regras"] { border-left-color:#829db4; }
+.directory-item.se-compendio-compacto[data-se-compendio-tipo="criaturas"] { border-left-color:#b97878; }
+.directory-item.se-compendio-compacto[data-se-compendio-tipo="bonus"] { border-left-color:#a38ebd; }
+.directory-item.se-compendio-compacto[data-se-compendio-tipo="pedidos"] { border-left-color:#8caaa0; }
+.directory-item.se-compendio-compacto[data-se-compendio-tipo="restrito"] { border-left-color:#8e6879; }
+
+.se-drs-form{display:grid;gap:12px}.se-drs-form label{display:grid;gap:5px}.se-drs-form input[type=checkbox]{width:auto}.se-drs .se-botoes{display:flex;flex-wrap:wrap;gap:6px}.se-drs button{flex:1 1 180px;height:auto;min-height:30px}
+
+
+/* Clássica: títulos de campos no mesmo padrão dos títulos de seção. */
+.ficha-sobrevivente:not(.se-alternativa-1) .se-carga-topo > label,
+.ficha-sobrevivente:not(.se-alternativa-1) .se-pe > label,
+.ficha-sobrevivente:not(.se-alternativa-1) .se-pe .se-pe-titulo {
+  font-family:var(--se-fonte-titulo);font-size:1.15rem;font-weight:400;
+  font-style:normal;line-height:1.35;color:var(--se-detalhe);
+}
+.ficha-sobrevivente:not(.se-alternativa-1) .se-pe {align-items:flex-start;flex-wrap:wrap}
+.ficha-sobrevivente:not(.se-alternativa-1) .se-pe .se-pe-investidos {gap:6px}
+.ficha-sobrevivente:not(.se-alternativa-1) .se-pe .se-pe-investidos strong {min-height:32px;display:flex;align-items:center}
+.ficha-sobrevivente:not(.se-alternativa-1) .se-pe .se-pe-investidos small {font:400 .9rem/1.4 var(--se-fonte-texto);color:var(--se-texto-fraco)}

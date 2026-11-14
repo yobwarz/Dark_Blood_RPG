@@ -1,0 +1,6 @@
+<div class="se-icones-painel">
+ <p>Escolha uma imagem para <strong>{{nome}}</strong>. O ícone será mantido ao renomear o item.</p>
+ <div class="se-icones-filtros"><input type="search" data-busca placeholder="Buscar ícone" aria-label="Buscar ícone"><select data-grupo aria-label="Categoria"><option value="">Todas as categorias</option>{{#each grupos}}<option value="{{this}}">{{this}}</option>{{/each}}</select></div>
+ <div class="se-icones-grid">{{#each icones}}<button type="button" data-action="escolher" data-icone="{{id}}" data-nome="{{nome}}" data-grupo="{{grupo}}" title="{{nome}}"><img src="{{img}}" alt="{{nome}}" loading="lazy"><span>{{nome}}</span></button>{{/each}}</div>
+ <p>Os desenhos futuristas são representações visuais. Nenhum atributo ou regra do item é alterado.</p>
+</div>

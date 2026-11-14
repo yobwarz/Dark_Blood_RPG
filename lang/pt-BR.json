@@ -1,0 +1,9 @@
+{
+  "SE.Sistema": "Sangue Escuro",
+  "TYPES.Actor.character": "Sobrevivente",
+  "TYPES.Actor.criatura": "Criatura",
+  "TYPES.Item.arma": "Arma",
+  "TYPES.Item.protecao": "Proteção",
+  "TYPES.Item.habilidade": "Habilidade Passiva",
+  "TYPES.Item.equipamento": "Equipamento"
+}

@@ -1,0 +1,25 @@
+<div class="se-config-corpo">
+  <p class="se-dica">Digite o código hexadecimal (#RRGGBB) ou use o seletor. As mudanças valem para todas as fichas abertas assim que você salvar.</p>
+
+  <div class="se-config-presets">
+    {{#each presets}}
+    <button type="button" class="se-botao pequeno" data-action="preset" data-preset="{{this}}">{{this}}</button>
+    {{/each}}
+  </div>
+
+  <div class="se-cores">
+    {{#each campos}}
+    <div class="se-cor-linha">
+      <span>{{rotulo}}</span>
+      <input type="color" name="cor-{{chave}}" value="{{valor}}" aria-label="{{rotulo}}">
+      <input type="text" name="txt-{{chave}}" value="{{valor}}" maxlength="7" pattern="#[0-9a-fA-F]{6}" aria-label="Hexadecimal de {{rotulo}}">
+    </div>
+    {{/each}}
+  </div>
+
+  <footer class="se-config-rodape">
+    <button type="button" class="se-botao" data-action="restaurar">Restaurar padrão</button>
+    {{#if pessoal}}<button type="button" class="se-botao" data-action="limpar">Usar as cores do mundo</button>{{/if}}
+    <button type="submit" class="se-botao ativo">Salvar</button>
+  </footer>
+</div>

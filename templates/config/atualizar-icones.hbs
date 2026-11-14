@@ -1,0 +1,7 @@
+<div class="se-atualizar-icones">
+ <p>Aplica imagens do pacote aos itens com nome reconhecido e ícone genérico. Imagens personalizadas são preservadas. Não cria itens, não muda atributos e não duplica inventários.</p>
+ <label><input type="checkbox" name="mundo" checked> Itens do mundo e inventários ({{quantidade}} correspondências)</label>
+ <h3>Compêndios opcionais</h3><p>Selecione os compêndios que deseja atualizar. Desbloqueie-os no Foundry antes de abrir esta janela.</p>
+ {{#each pacotes}}<label style="display:block;margin:8px 0"><input type="checkbox" name="pacote" value="{{id}}" {{#if bloqueado}}disabled{{/if}}> {{nome}}{{#if bloqueado}} — bloqueado{{/if}}</label>{{/each}}
+ <button type="button" data-action="aplicar">Aplicar ícones disponíveis</button>
+</div>

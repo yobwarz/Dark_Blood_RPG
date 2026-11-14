@@ -1,0 +1,58 @@
+{
+  "id": "sangue-escuro",
+  "title": "Sangue Escuro RPG",
+  "description": "Sistema Sangue Escuro RPG, DRS 1.2 consolidado de 13/11/2026, com API de extensões 1.4 e regras de sobrevivência.",
+  "version": "0.8.6",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "Sangue Escuro"
+    }
+  ],
+  "esmodules": [
+    "sangue-escuro.mjs"
+  ],
+  "styles": [
+    "styles/sangue-escuro.css",
+    "styles/ficha-alternativa-1.css"
+  ],
+  "languages": [
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "criatura": {}
+    },
+    "Item": {
+      "arma": {},
+      "protecao": {},
+      "habilidade": {},
+      "equipamento": {}
+    }
+  },
+  "grid": {
+    "distance": 1.5,
+    "units": "m"
+  },
+  "primaryTokenAttribute": "pv",
+  "secondaryTokenAttribute": "estresse",
+  "media": [
+    {
+      "type": "setup",
+      "url": "systems/sangue-escuro/assets/capa-sistema.png",
+      "thumbnail": "systems/sangue-escuro/assets/capa-sistema.png",
+      "caption": "Sangue Escuro RPG — Dark Blood RPG"
+    }
+  ],
+  "url": "https://github.com/yobwarz/Dark_Blood_RPG",
+  "manifest": "https://github.com/yobwarz/Dark_Blood_RPG/releases/latest/download/system.json",
+  "download": "https://github.com/yobwarz/Dark_Blood_RPG/releases/download/v0.8.6/sangue-escuro.zip"
+}

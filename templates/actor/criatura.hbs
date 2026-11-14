@@ -1,0 +1,84 @@
+<div class="se-ficha se-simples se-criatura">
+
+  <div class="se-ornamento-topo" aria-hidden="true">
+    <span class="fio"></span><i></i><i class="grande"></i><i></i><span class="fio"></span>
+    <em>Ficha de Criatura</em>
+    <span class="fio"></span><i></i><i class="grande"></i><i></i><span class="fio"></span>
+  </div>
+
+  <section class="se-cabeca-simples">
+    <button type="button" class="se-retrato" data-action="trocarImagem" aria-label="Trocar imagem">
+      <img src="{{actor.img}}" alt="{{actor.name}}">
+    </button>
+    <div class="se-pilulas">
+      <label class="se-pilula"><span class="se-pilula-rotulo">Nome</span>
+        <input type="text" name="name" value="{{actor.name}}" placeholder="Nome da criatura"></label>
+      <label class="se-pilula"><span class="se-pilula-rotulo">Integrantes</span>
+        <input type="number" name="system.integrantes" value="{{system.integrantes}}" min="1"></label>
+    </div>
+  </section>
+
+  <section class="se-recursos se-recursos-unico">
+    <div class="se-recurso">
+      <div class="se-recurso-pilula">
+        <button type="button" class="se-icone" data-action="ajustar" data-delta="-1" aria-label="Diminuir PV">−</button>
+        <span class="se-recurso-nome">Pontos de Vida</span>
+        <span class="se-recurso-max"><input type="number" name="system.pv.max" value="{{system.pv.max}}" min="0" aria-label="PV máximo"></span>
+        <span class="se-recurso-valor"><input type="number" name="system.pv.value" value="{{system.pv.value}}" min="0" aria-label="PV atual"></span>
+        <button type="button" class="se-icone" data-action="ajustar" data-delta="1" aria-label="Aumentar PV">+</button>
+      </div>
+      <div class="se-barra-pv" role="progressbar" aria-valuenow="{{system.pv.value}}" aria-valuemin="0" aria-valuemax="{{system.pv.max}}"><span style="width: {{pvPct}}%"></span></div>
+    </div>
+  </section>
+
+  <section class="se-estatisticas">
+    <label class="se-estat"><span>NA</span><input type="number" name="system.na" value="{{system.na}}"></label>
+    <label class="se-estat"><span>PR</span><input type="number" name="system.pr" value="{{system.pr}}" min="0"></label>
+    <label class="se-estat"><span>Deslocamento (m)</span><input type="number" step="0.5" name="system.deslocamento" value="{{system.deslocamento}}"></label>
+    <label class="se-estat"><span>Iniciativa</span><input type="number" name="system.iniciativa" value="{{system.iniciativa}}"></label>
+  </section>
+
+  <section class="se-painel">
+    <h3>Ataque</h3>
+    <div class="se-tres">
+      <label>Bônus de ataque<input type="number" name="system.ataque" value="{{system.ataque}}"></label>
+      <label>Dano<input type="text" name="system.dano" value="{{system.dano}}"></label>
+      <label>Tipo<select name="system.tipoDano">{{selectOptions opTipoDano selected=system.tipoDano}}</select></label>
+    </div>
+    <div class="se-botoes-grade">
+      <button type="button" class="se-botao" data-action="rolarIniciativa" title="Entra no combate e rola a Iniciativa">Iniciativa</button>
+      <button type="button" class="se-botao" data-action="atacar" title="Rola contra o NA do alvo selecionado">Atacar</button>
+      <button type="button" class="se-botao" data-action="dano">Rolar dano</button>
+    </div>
+  </section>
+
+  <section class="se-painel">
+    <h3>Condições</h3>
+    <div class="se-chips">
+      {{#each condicoes}}
+      <label class="se-chip {{#if ativa}}ativa{{/if}}">
+        <input type="checkbox" name="system.condicoes.{{chave}}" {{checked ativa}}>
+        <span>{{nome}}</span>
+      </label>
+      {{/each}}
+    </div>
+    <label class="se-check"><input type="checkbox" name="system.semCirculacao" {{checked system.semCirculacao}}> Sem circulação sanguínea funcional (imune a Sangramento)</label>
+  </section>
+
+  {{{slot}}}
+
+  <section class="se-painel se-notas-formatadas">
+    <h3>Anotações</h3>
+    <div class="se-texto-formatado" data-campo="notas">
+      {{#if editable}}
+      <div class="se-texto-acoes">
+        <button type="button" data-action="editarTexto" class="se-texto-abrir">Editar texto</button>
+        <button type="button" data-action="salvarTexto" class="se-texto-salvar">Salvar texto</button>
+        <button type="button" data-action="cancelarTexto" class="se-texto-cancelar">Cancelar</button>
+      </div>
+      {{/if}}
+      <div class="se-texto-leitura editor-content">{{{notasHTML}}}</div>
+      <div class="se-texto-edicao"></div>
+    </div>
+  </section>
+</div>

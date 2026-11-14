@@ -1,0 +1,107 @@
+<div class="se-ficha se-simples se-item-ficha">
+  <section class="se-cabeca-simples">
+    <button type="button" class="se-retrato" data-action="trocarImagem" aria-label="Trocar imagem">
+      <img src="{{item.img}}" alt="{{item.name}}">
+    </button>
+    <div class="se-pilulas">
+      <label class="se-pilula"><span class="se-pilula-rotulo">{{rotuloTipo}}</span>
+        <input type="text" name="name" value="{{item.name}}" placeholder="Nome"></label>
+    </div>
+  </section>
+
+  {{#if editable}}<div class="se-icones-acoes"><button type="button" data-action="galeriaIcones"><i class="fa-solid fa-images"></i> Escolher ícone</button></div>{{/if}}
+
+  <div class="se-aba-conteudo">
+    <section class="se-painel se-form">
+
+      {{#unless itemPersonalizado}}
+      {{#if (eq tipo "arma")}}
+        <label>Categoria<select name="system.categoria">{{selectOptions opCategoriaArma selected=system.categoria}}</select></label>
+        <label>Subgrupo<input type="text" name="system.subgrupo" value="{{system.subgrupo}}"></label>
+        <div class="se-duas">
+          <label>Dano<input type="text" name="system.dano" value="{{system.dano}}"></label>
+          <label>Tipo de dano<select name="system.tipoDano">{{selectOptions opTipoDano selected=system.tipoDano}}</select></label>
+        </div>
+        <div class="se-duas">
+          <label>Atributo do ataque<select name="system.atributo">{{selectOptions opAtributo selected=system.atributo}}</select></label>
+          <label class="se-check"><input type="checkbox" name="system.somaAtributoDano" {{checked system.somaAtributoDano}}> Somar modificador ao dano</label>
+        </div>
+        <div class="se-duas">
+          <label>Margem de crítico (natural a partir de)<input type="number" name="system.margemCritico" value="{{system.margemCritico}}" min="18" max="20"></label>
+          <label>Bônus crítico (dado, ex.: 1d6)<input type="text" name="system.bonusCritico" value="{{system.bonusCritico}}"></label>
+        </div>
+        <label>Efeito crítico<select name="system.efeitoCritico">{{selectOptions opEfeito selected=system.efeitoCritico}}</select></label>
+        <div class="se-duas">
+          <label>Durabilidade (PD)<input type="number" name="system.durabilidade.value" value="{{system.durabilidade.value}}" min="0"></label>
+          <label>PD máximo<input type="number" name="system.durabilidade.max" value="{{system.durabilidade.max}}" min="0"></label>
+        </div>
+        <div class="se-duas">
+          <label>Munição<input type="text" name="system.municao" value="{{system.municao}}"></label>
+          <label>Capacidade<input type="number" name="system.capacidade" value="{{system.capacidade}}" min="0"></label>
+        </div>
+        <div class="se-duas">
+          <label>Munição atual (vazio = cheio)<input type="number" name="system.municaoAtual" value="{{system.municaoAtual}}" min="0"></label>
+          <label class="se-check"><input type="checkbox" name="system.travada" {{checked system.travada}}> Arma travada</label>
+        </div>
+        <div class="se-duas">
+          <label>Ações por ataque<input type="number" name="system.acoesPorAtaque" value="{{system.acoesPorAtaque}}" min="1" max="4"></label>
+          <label class="se-check"><input type="checkbox" name="system.longa" {{checked system.longa}}> Arma longa (2 compartimentos)</label>
+        </div>
+      {{/if}}
+
+      {{#if (eq tipo "protecao")}}
+        <div class="se-duas">
+          <label>PR<input type="number" name="system.pr" value="{{system.pr}}" min="0"></label>
+          <label>Proteção específica contra fogo<input type="number" name="flags.sangue-escuro.protecaoFogo" value="{{item.flags.sangue-escuro.protecaoFogo}}" min="0" step="1"></label>
+          <label>Compartimentos<input type="number" name="system.compartimentos" value="{{system.compartimentos}}" min="0"></label>
+        </div>
+        <label>Penalidade<input type="text" name="system.penalidade" value="{{system.penalidade}}"></label>
+        <div class="se-duas">
+          <label>Durabilidade<input type="number" name="system.durabilidade.value" value="{{system.durabilidade.value}}" min="0"></label>
+          <label>PD máximo<input type="number" name="system.durabilidade.max" value="{{system.durabilidade.max}}" min="0"></label>
+        </div>
+      {{/if}}
+
+      {{#if (eq tipo "habilidade")}}
+        <div class="se-duas">
+          <label>Custo (PE)<input type="number" name="system.custo" value="{{system.custo}}" min="0"></label>
+          <label>Grupo<input type="text" name="system.grupo" value="{{system.grupo}}"></label>
+        </div>
+        <label>Pré-requisito<input type="text" name="system.prerequisito" value="{{system.prerequisito}}"></label>
+        <div class="se-duas">
+          <label>Usos (0 = ilimitado)<input type="number" name="system.usos.max" value="{{system.usos.max}}" min="0"></label>
+          <label>Usos restantes<input type="number" name="system.usos.value" value="{{system.usos.value}}" min="0"></label>
+        </div>
+        <label>Recarga<select name="system.usos.recarga">{{selectOptions opRecarga selected=system.usos.recarga}}</select></label>
+      {{/if}}
+
+      {{#if (eq tipo "equipamento")}}
+        <label>Categoria<select name="system.categoria">{{selectOptions opCategoriaEquip selected=system.categoria}}</select></label>
+        <div class="se-duas">
+          <label>Quantidade<input type="number" name="system.quantidade" value="{{system.quantidade}}" min="0"></label>
+          <label>Usos<input type="number" name="system.usos" value="{{system.usos}}" min="0"></label>
+        </div>
+        <div class="se-duas">
+          <label>Unidades por compartimento (0 = padrão da categoria)<input type="number" name="system.porCompartimento" value="{{system.porCompartimento}}" min="0"></label>
+          <label>Compartimentos fixos (0 = calcular)<input type="number" name="system.compartimentosFixos" value="{{system.compartimentosFixos}}" min="0"></label>
+        </div>
+      {{/if}}
+
+      {{/unless}}
+      {{#if itemPersonalizado}}{{{extensoes}}}{{/if}}
+      <h3>{{#if itemPersonalizado}}Anotações do cartão{{else}}Descrição{{/if}}</h3>
+      <div class="se-texto-formatado" data-campo="descricao">
+      {{#if editable}}
+      <div class="se-texto-acoes">
+        <button type="button" data-action="editarTexto" class="se-texto-abrir">Editar texto</button>
+        <button type="button" data-action="salvarTexto" class="se-texto-salvar">Salvar texto</button>
+        <button type="button" data-action="cancelarTexto" class="se-texto-cancelar">Cancelar</button>
+      </div>
+      {{/if}}
+      <div class="se-texto-leitura editor-content">{{{descricaoHTML}}}</div>
+      <div class="se-texto-edicao"></div>
+    </div>
+      {{#unless itemPersonalizado}}{{{extensoes}}}{{/unless}}
+    </section>
+  </div>
+</div>

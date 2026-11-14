@@ -1,0 +1,7 @@
+<section class="se-painel se-drs"><h3>Turnos</h3>
+<div class="se-botoes">
+<button type="button" data-action="extensao" data-ext="drs-turno" data-acao="executar" data-drs="correr">Correr · 1 Ação{{#if correu}} · utilizado{{/if}}</button>
+<button type="button" data-action="extensao" data-ext="drs-turno" data-acao="executar" data-drs="desengajar">Desengajar · 1 Ação{{#if desengajou}} · ativo{{/if}}</button>
+<button type="button" data-action="extensao" data-ext="drs-turno" data-acao="executar" data-drs="bonus">Usar Ação Bônus</button>
+<button type="button" data-action="extensao" data-ext="drs-turno" data-acao="executar" data-drs="reacao">Ataque de Reação</button>
+{{#if gm}}<button type="button" data-action="extensao" data-ext="drs-turno" data-acao="executar" data-drs="finalizacao">Finalização por Agarrão</button><button type="button" data-action="extensao" data-ext="drs-turno" data-acao="executar" data-drs="execucao">Execução de Indefeso</button>{{/if}}</div><p class="se-nota">Correr uma vez por turno. Reação recuperada no início do próprio turno. Ataques de reação exigem gatilho e requisitos válidos.</p></section>

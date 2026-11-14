@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import {readFile,access} from 'node:fs/promises';
+import {ICONES, sugerirIcone, imagemAutomatica, aplicarIcones} from '../module/icones.mjs';
+const arma=name=>({name,type:'arma',img:'icons/svg/sword.svg'});
+for(const nome of ['Faca','Faca de cozinha','Faca ou adaga','Besta','Pistola 9 mm','Pistola 9mm','Fuzil AK-47','Cortador de Plasma','Serra de Plasma']) assert.ok(imagemAutomatica(arma(nome)),nome);
+for(const nome of ['Arma desconhecida','Espada alienígena','Taco de beisebol experimental'])assert.equal(sugerirIcone(arma(nome)),null,nome);
+assert.equal(sugerirIcone({name:'Cartucho de Serra de Plasma',type:'equipamento'}),null);
+assert.equal(sugerirIcone({name:'Faca',type:'habilidade'}),null);
+assert.equal(imagemAutomatica({...arma('Faca'),img:'worlds/campanha/minha-faca.webp'}),null);
+assert.equal(imagemAutomatica({...arma('Faca'),flags:{'sangue-escuro':{iconeManual:true}}}),null);
+for(const icon of ICONES)await access(new URL('../'+icon.img.replace('systems/sangue-escuro/',''),import.meta.url));
+assert.equal(new Set(ICONES.map(i=>i.id)).size,ICONES.length);
+const updates=[];const item={...arma('Faca'),isOwner:true,update:async data=>{updates.push(data);Object.assign(item,data);}};
+globalThis.game={packs:new Map([['world.trancado',{locked:true}]])};
+const locked={...arma('Besta'),isOwner:true,pack:'world.trancado',update:()=>assert.fail('Não alterar pack bloqueado')};
+assert.equal(await aplicarIcones([item,{...arma('Faca'),isOwner:false},locked]),1);
+assert.deepEqual(Object.keys(updates[0]),['img']);assert.equal(await aplicarIcones([item]),0);
+// Caminho real de criação de Item, incluindo um item de expansão com imagem própria.
+globalThis.Item=class {static DEFAULT_ICON='icons/svg/item-bag.svg';async _preCreate(){return true;}updateSource(d){Object.assign(this,d);}};
+globalThis.Actor=class{};globalThis.Combatant=class{};
+const {SEItem}=await import('../module/documents.mjs');
+const novo=new SEItem();novo.type='arma';await novo._preCreate(arma('Besta'),{},'gm');assert.equal(novo.img,sugerirIcone(arma('Besta')).img);
+const personalizado=new SEItem();personalizado.type='arma';await personalizado._preCreate({...arma('Faca'),img:'custom.png'},{});assert.equal(personalizado.img,undefined);
+const descricao=await readFile(new URL('../templates/item/item.hbs',import.meta.url),'utf8');assert.ok(descricao.includes('galeriaIcones'));assert.ok(descricao.includes('se-texto-leitura'));
+console.log(`OK: ${ICONES.length} arquivos, associação conservadora, preservação de imagens, permissões, bloqueios, idempotência e criação de itens.`);
+// Galeria usa os documentos nativos e protege a escolha manual.
+globalThis.foundry={applications:{api:{ApplicationV2:class{},HandlebarsApplicationMixin:B=>B}}};
+const {GaleriaIcones,AtualizarIconesMenu,registrarIcones}=await import('../module/icones-ui.mjs');
+let escolhido,fechou=false;
+await GaleriaIcones.escolher.call({item:{isOwner:true,update:async d=>escolhido=d},close:async()=>{fechou=true;}},{},{dataset:{icone:'12_faca'}});
+assert.equal(escolhido.img,sugerirIcone(arma('Faca')).img);assert.equal(escolhido['flags.sangue-escuro.iconeManual'],true);assert.ok(fechou);
+let bloqueado=true;await GaleriaIcones.escolher.call({item:{isOwner:false,update:()=>{bloqueado=false;}}},{},{dataset:{icone:'12_faca'}});assert.ok(bloqueado);
+game.settings={registerMenu:(namespace,id,options)=>{assert.equal(options.restricted,true);assert.equal(options.type,AtualizarIconesMenu);}};registrarIcones();
+console.log('OK: galeria salva imagem e proteção manual, respeita leitor e restringe atualização ao Mestre.');

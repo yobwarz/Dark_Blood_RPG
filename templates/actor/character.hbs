@@ -1,0 +1,481 @@
+<div class="se-ficha se-paginada">
+
+  <div class="se-corpo">
+
+  {{#if (eq aba "ficha")}}
+  {{!-- ============ ORNAMENTO + MARCA ============ --}}
+  <div class="se-ornamento-topo" aria-hidden="true">
+    <span class="fio"></span><i></i><i class="grande"></i><i></i><span class="fio"></span>
+    <em>Ficha do Sobrevivente</em>
+    <span class="fio"></span><i></i><i class="grande"></i><i></i><span class="fio"></span>
+  </div>
+
+  <div class="se-marca">
+    <span class="se-marca-titulo">Sangue<b>·</b>Escuro</span>
+    <span class="se-marca-sub">O Mundo Após a Queda</span>
+  </div>
+
+  {{!-- ============ IDENTIDADE + RODA ============ --}}
+  <section class="se-palco">
+    <div class="se-identidade-bloco">
+      <button type="button" class="se-retrato" data-action="trocarImagem" aria-label="Trocar retrato">
+        <img src="{{actor.img}}" alt="{{actor.name}}">
+      </button>
+      <div class="se-pilulas">
+        <label class="se-pilula"><span class="se-pilula-rotulo">Nome</span>
+          <input type="text" name="name" value="{{actor.name}}" placeholder="Nome do sobrevivente"></label>
+        <label class="se-pilula"><span class="se-pilula-rotulo">Perfil</span>
+          <input type="text" name="system.biografia.perfil" value="{{system.biografia.perfil}}" placeholder="Ex.: Socorrista"></label>
+        <label class="se-pilula"><span class="se-pilula-rotulo">Conceito</span>
+          <input type="text" name="system.biografia.conceito" value="{{system.biografia.conceito}}" placeholder="Quem era antes da queda"></label>
+      </div>
+    </div>
+
+    {{#if alternativa}}<div class="se-roda-espaco">{{/if}}
+    <div class="se-roda" role="group" aria-label="Atributos">
+      <svg class="se-roda-arte" viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="se-arco-{{actor.id}}" d="M 44 100 A 56 56 0 0 1 156 100"/></defs>
+        <circle cx="100" cy="100" r="96" class="anel"/>
+        <circle cx="100" cy="100" r="92" class="anel fino"/>
+        {{#if alternativa}}
+        <image class="se-roda-simbolo" href="systems/sangue-escuro/assets/simbolos/risco-biologico.png" x="41" y="62" width="118" height="84" preserveAspectRatio="xMidYMid meet"/>
+        {{else}}
+        <text class="arco"><textPath href="#se-arco-{{actor.id}}" startOffset="50%" text-anchor="middle">A T R I B U T O S</textPath></text>
+        <g class="gota">
+          <path d="M100 88 C100 88 82 110 82 124 a18 18 0 0 0 36 0 C118 110 100 88 100 88Z"/>
+          <path d="M100 100 L100 138 M90 120 L100 129 L110 120" class="veio"/>
+        </g>
+        {{/if}}
+        <g class="raios">
+          <path d="M44 150 L100 132 L156 150 L100 168 Z"/><path d="M60 156 L100 144 L140 156"/><path d="M76 160 L100 152 L124 160"/>
+        </g>
+      </svg>
+      {{#each roda}}
+      <div class="se-no lado-{{lado}}" style="left: {{x}}%; top: {{y}}%;">
+        <button type="button" class="se-no-rotulo" data-action="rolarAtributo" data-chave="{{chave}}"
+          title="Rolar {{nome}} (Shift: Vantagem, Ctrl: Desvantagem)">{{nome}}</button>
+        <div class="se-no-circulo">
+          <input type="number" name="system.atributos.{{chave}}.valor" value="{{valor}}" min="1" max="30" aria-label="{{nome}}">
+          {{#if @root.alternativa}}
+          <button type="button" class="se-no-mod" data-action="rolarAtributo" data-chave="{{chave}}" aria-label="Rolar {{nome}}, modificador {{mod}}" title="Rolar {{nome}} (Shift: Vantagem, Ctrl: Desvantagem)">{{mod}}</button>
+          {{else}}<span class="se-no-mod" title="Modificador">{{mod}}</span>{{/if}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{#if alternativa}}</div>{{/if}}
+  </section>
+
+
+
+  {{!-- ============ RECURSOS ============ --}}
+  <section class="se-recursos" aria-label="Recursos">
+    {{#each recursos}}
+    {{#if @root.alternativa}}
+    <div class="se-recurso se-alt-recurso {{#if critico}}se-alt-critico{{/if}}">
+      <button type="button" class="se-recurso-nome" data-action="menuRecurso" data-campo="{{campo}}" title="Ações de {{rotulo}}">{{rotulo}}</button>
+      <div class="se-alt-valores">
+        <label>Atual<input type="number" name="system.{{campo}}.value" value="{{valor}}" min="0" aria-label="{{rotulo}} atual"></label>
+        <span class="se-alt-barra" aria-hidden="true">/</span>
+        <label>{{limiteRotulo}}<input type="number" name="system.{{campo}}.max" value="{{max}}" min="0" aria-label="{{rotulo}} {{limiteRotulo}}"></label>
+      </div>
+      {{#if dica}}<span class="se-recurso-dica">{{dica}}</span>{{/if}}
+      {{#if aviso}}<strong class="se-alt-aviso">⚠ {{aviso}}</strong>{{/if}}
+      <div class="se-pips">
+        {{#each pips}}
+        <button type="button" class="se-pip {{#if cheio}}cheio{{/if}}" data-action="pip" data-campo="{{../campo}}" data-n="{{n}}" aria-label="{{../rotulo}} {{n}}" aria-pressed="{{#if cheio}}true{{else}}false{{/if}}"></button>
+        {{/each}}
+      </div>
+    </div>
+    {{else}}
+    <div class="se-recurso">
+      <div class="se-recurso-pilula">
+        <button type="button" class="se-recurso-nome" data-action="menuRecurso" data-campo="{{campo}}" title="Clique para ver as ações de {{rotulo}}">{{rotulo}}</button>
+        <em class="se-recurso-dica" title="{{dica}}">{{dica}}</em>
+        <span class="se-recurso-max">
+          <input type="number" name="system.{{campo}}.max" value="{{max}}" min="0" aria-label="{{rotulo}} máximo">
+        </span>
+        <span class="se-recurso-valor">
+          <input type="number" name="system.{{campo}}.value" value="{{valor}}" min="0" aria-label="{{rotulo}} atual">
+        </span>
+      </div>
+      <div class="se-pips">
+        {{#each pips}}
+        <button type="button" class="se-pip {{#if cheio}}cheio{{/if}}" data-action="pip" data-campo="{{../campo}}" data-n="{{n}}"
+          aria-label="{{../rotulo}} {{n}}" aria-pressed="{{#if cheio}}true{{else}}false{{/if}}"></button>
+        {{/each}}
+      </div>
+          </div>
+    {{/if}}
+    {{/each}}
+  </section>
+
+  <section class="se-secundarios" aria-label="Sobrevivência">
+    {{#each secundarios}}
+    {{#if @root.alternativa}}
+    <div class="se-recurso se-alt-recurso {{#if critico}}se-alt-critico{{/if}}">
+      <button type="button" class="se-recurso-nome" data-action="menuRecurso" data-campo="{{campo}}" title="Ações de {{rotulo}}">{{rotulo}}</button>
+      <div class="se-alt-valores">
+        <label>Atual<input type="number" name="system.{{campo}}.value" value="{{valor}}" min="0" aria-label="{{rotulo}} atual"></label>
+        <span class="se-alt-barra" aria-hidden="true">/</span>
+        <div class="se-alt-limite"><span>{{limiteRotulo}}</span><strong>{{max}}</strong></div>
+      </div>
+      {{#if dica}}<span class="se-recurso-dica">{{dica}}</span>{{/if}}
+      {{#if aviso}}<strong class="se-alt-aviso">⚠ {{aviso}}</strong>{{/if}}
+      <div class="se-pips">
+        {{#each pips}}
+        <button type="button" class="se-pip {{#if cheio}}cheio{{/if}}" data-action="pip" data-campo="{{../campo}}" data-n="{{n}}" aria-label="{{../rotulo}} {{n}}" aria-pressed="{{#if cheio}}true{{else}}false{{/if}}"></button>
+        {{/each}}
+      </div>
+    </div>
+    {{else}}
+    <div class="se-recurso se-recurso-menor">
+      <div class="se-recurso-pilula">
+        <button type="button" class="se-recurso-nome" data-action="menuRecurso" data-campo="{{campo}}" title="Clique para ver as ações de {{rotulo}}">{{rotulo}}</button>
+        <em class="se-recurso-dica" title="{{dica}}">{{dica}}</em>
+        <span class="se-recurso-valor"><input type="number" name="system.{{campo}}.value" value="{{valor}}" min="0" aria-label="{{rotulo}} atual"></span>
+      </div>
+      <div class="se-pips">
+        {{#each pips}}
+        <button type="button" class="se-pip {{#if cheio}}cheio{{/if}}" data-action="pip" data-campo="{{../campo}}" data-n="{{n}}"
+          aria-label="{{../rotulo}} {{n}}" aria-pressed="{{#if cheio}}true{{else}}false{{/if}}"></button>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+    {{/each}}
+  </section>
+
+  {{!-- ============ DIVISOR ============ --}}
+  <div class="se-divisor" aria-hidden="true">
+    <span></span><i></i><span></span><i></i><span></span><i class="grande"></i><span></span><i></i><span></span><i></i><span></span>
+  </div>
+
+  {{!-- ============ DERIVADOS ============ --}}
+  <section class="se-derivados">
+    <div class="se-pe-chip"><span>Evolução (PE)</span><input type="number" name="system.pe.disponivel" value="{{system.pe.disponivel}}" min="0" aria-label="Pontos de Evolução disponíveis"></div>
+    <div><span>NA</span><strong>{{system.na}}</strong></div>
+    <div><span>PR</span><strong>{{system.pr}}</strong></div>
+    <div><span>Deslocamento</span><strong>{{system.deslocamento}} m</strong></div>
+    <div><span>Corrida</span><strong>{{system.corrida}} m</strong></div>
+    <div><span>Percepção passiva</span><strong>{{system.percepcaoPassiva}}</strong></div>
+    <div><span>Mod. temporário</span><input type="number" name="system.modTemporario" value="{{system.modTemporario}}"></div>
+    <button type="button" class="se-botao" data-action="rolarIniciativa" title="Entra no combate e rola 1d20 + modificador de Agilidade">Iniciativa</button>
+  </section>
+
+
+  {{!-- ============ PERÍCIAS ============ --}}
+  <section class="se-pericias" aria-label="Perícias">
+    <div class="se-pericias-topo">
+      <h3>Perícias</h3>
+      <span class="se-dica">Clique no losango para mudar o grau (Proficiente +2, Especialista +4) e no nome para rolar. Shift: Vantagem. Ctrl: Desvantagem.</span>
+    </div>
+    <div class="se-pericias-colunas">
+      {{#each colunas}}
+      <div class="se-coluna">
+        {{#each this}}
+        <section class="se-grupo">
+          <h4>{{nome}}</h4>
+          {{#each pericias}}
+          <div class="se-pericia grau-{{grau}}">
+            <button type="button" class="se-grau" data-action="ciclarGrau" data-chave="{{chave}}" title="{{grauNome}}" aria-label="Grau de {{nome}}: {{grauNome}}">
+              <span class="{{#if (gt grau 0)}}on{{/if}}"></span><span class="{{#if (gt grau 1)}}on{{/if}}"></span>
+            </button>
+            <button type="button" class="se-pericia-nome" data-action="rolarPericia" data-chave="{{chave}}">{{nome}}</button>
+            {{#if temAlt}}
+              <select name="system.pericias.{{chave}}.attr" aria-label="Atributo de {{nome}}">{{selectOptions opcoesAttr selected=attr}}</select>
+            {{else}}
+              <span class="se-attr">{{attrSigla}}</span>
+            {{/if}}
+            <strong class="se-total">{{total}}</strong>
+          </div>
+          {{/each}}
+        </section>
+        {{/each}}
+      </div>
+      {{/each}}
+    </div>
+  </section>
+  {{{slot}}}
+
+  {{else}}
+
+  {{!-- ============ BARRA COMPACTA (subpáginas) ============ --}}
+  <header class="se-barra-compacta">
+    <button type="button" class="se-retrato pequeno" data-action="trocarImagem" aria-label="Trocar retrato"><img src="{{actor.img}}" alt=""></button>
+    <div class="se-barra-nome">
+      <strong>{{actor.name}}</strong>
+      <span>{{system.biografia.perfil}}</span>
+    </div>
+    <div class="se-resumo">
+      {{#each resumo}}
+      <div class="se-resumo-chip" title="{{rotulo}}">
+        <button type="button" class="se-resumo-nome" data-action="menuRecurso" data-campo="{{campo}}" title="Ações de {{rotulo}}">{{rotulo}}</button>
+        <div>
+          <button type="button" class="se-icone" data-action="ajustar" data-campo="{{campo}}" data-delta="-1" aria-label="Diminuir {{rotulo}}">−</button>
+          <strong>{{valor}}<small>/{{max}}</small></strong>
+          <button type="button" class="se-icone" data-action="ajustar" data-campo="{{campo}}" data-delta="1" aria-label="Aumentar {{rotulo}}">+</button>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </header>
+  {{#unless alternativa}}
+  <section class="se-atributos-mini" aria-label="Atributos" style="grid-template-columns: repeat({{nAtributos}}, 1fr);">
+    {{#each roda}}
+    <button type="button" class="se-mini-attr" data-action="rolarAtributo" data-chave="{{chave}}" title="Rolar {{nome}} (Shift: Vantagem, Ctrl: Desvantagem)">
+      <span>{{sigla}}</span><strong>{{valor}}</strong><em>{{mod}}</em>
+    </button>
+    {{/each}}
+  </section>
+  <div class="se-divisor" aria-hidden="true"><span></span><i></i><span></span><i class="grande"></i><span></span><i></i><span></span></div>
+
+  {{/unless}}
+
+  <div class="se-aba-conteudo">
+    {{!-- ---------- COMBATE ---------- --}}
+    {{#if (eq aba "combate")}}
+    <div class="se-combate">
+
+      <section class="se-painel se-turno">
+        <h3>Turno
+          <span class="se-novo">
+            <button type="button" class="se-botao pequeno" data-action="rolarIniciativa" title="Entra no Combat Tracker e rola a Iniciativa">Rolar Iniciativa</button>
+            <button type="button" class="se-botao pequeno" data-action="acaoAntecipada" title="+1 ação agora; no próximo turno terá 2 ações">Ação Antecipada</button>
+          </span>
+        </h3>
+        <div class="se-turno-linha">
+          <div class="se-turno-bloco">
+            <span class="se-turno-rotulo">Ações ({{turno.quantidade}})</span>
+            <div class="se-pips">
+              {{#each turno.acoes}}
+              <button type="button" class="se-pip grande {{#if cheio}}cheio{{/if}}" data-action="turnoPip" data-n="{{n}}" aria-label="Ação {{n}}" aria-pressed="{{#if cheio}}true{{else}}false{{/if}}"></button>
+              {{/each}}
+            </div>
+          </div>
+          <div class="se-turno-bloco">
+            <span class="se-turno-rotulo">Reação</span>
+            <div class="se-pips"><button type="button" class="se-pip grande {{#if turno.reacao}}cheio{{/if}}" data-action="turnoToggle" data-campo="reacao" aria-label="Reação" aria-pressed="{{#if turno.reacao}}true{{else}}false{{/if}}"></button></div>
+          </div>
+          <div class="se-turno-bloco">
+            <span class="se-turno-rotulo">Ação Bônus</span>
+            <div class="se-pips"><button type="button" class="se-pip grande {{#if turno.bonus}}cheio{{/if}}" data-action="turnoToggle" data-campo="bonus" aria-label="Ação Bônus" aria-pressed="{{#if turno.bonus}}true{{else}}false{{/if}}"></button></div>
+          </div>
+          {{#if turno.divida}}<span class="se-selo-aviso" title="No próximo turno terá apenas 2 ações">Dívida de Ação</span>{{/if}}
+          {{#if turno.surpreendido}}<span class="se-selo-aviso">Surpreendido</span>{{/if}}
+        </div>
+        <p class="se-dica">{{turno.regra}} ações por turno e {{turno.regraReacoes}} Reação por rodada. Tudo é restaurado sozinho no início do seu turno no Combat Tracker (a Dívida de Ação reduz para 2 ações).</p>
+      </section>
+
+      <section class="se-painel">
+        <h3>Armas
+          <span class="se-novo"><button type="button" class="se-botao pequeno" data-action="desarmado" title="Usa Força; dano 1 + mod. de Força (mínimo 1)">Ataque desarmado</button></span>
+        </h3>
+        {{#each armas}}
+        <div class="se-linha-item" data-item-id="{{id}}" draggable="true">
+          <img src="{{img}}" alt="">
+          <div class="se-item-info">
+            <strong>{{nome}}</strong>
+            <small>{{dano}} {{tipoDano}} · Crítico {{margem}}{{#if bonusCritico}} (+{{bonusCritico}}){{/if}}{{#if efeito}} · {{efeito}}{{/if}} · PD {{pd}}/{{pdMax}}{{#if usaMunicao}} · Munição {{carregador}}/{{capacidade}}{{#if municao}} ({{municao}}){{/if}}{{/if}}{{#if travada}} · TRAVADA{{/if}}</small>
+          </div>
+          <div class="se-item-acoes">
+            {{#if travada}}<button type="button" class="se-botao perigo" data-action="itemDestravar" title="Destravar (1 Ação)">Destravar</button>{{/if}}
+            {{#if usaMunicao}}<button type="button" class="se-botao" data-action="itemRecarregar" title="Recarregar (1 Ação)">Recarregar</button>{{/if}}
+            <button type="button" class="se-botao" data-action="itemAtacar" title="Atacar (Shift: Vantagem, Ctrl: Desvantagem)">Atacar</button>
+            <button type="button" class="se-botao" data-action="itemDano" title="Rolar dano (Shift: crítico)">Dano</button>
+            <button type="button" class="se-icone {{#if empunhada}}ativo{{/if}}" data-action="itemEmpunhar" title="Empunhada" aria-label="Alternar empunhada">✋</button>
+            <button type="button" class="se-icone" data-action="itemEditar" title="Editar" aria-label="Editar">✎</button>
+            <button type="button" class="se-icone" data-action="itemApagar" title="Remover" aria-label="Remover">✕</button>
+          </div>
+        </div>
+        {{else}}
+        <p class="se-vazio">Nenhuma arma. Arraste do compêndio ou crie uma na aba Inventário.</p>
+        {{/each}}
+      </section>
+
+      <section class="se-painel">
+        <h3>Proteção corporal</h3>
+        {{#each protecoes}}
+        <div class="se-linha-item {{#if vestida}}destaque{{/if}}" data-item-id="{{id}}" draggable="true">
+          <img src="{{img}}" alt="">
+          <div class="se-item-info">
+            <strong>{{nome}}</strong>
+            <small>PR {{pr}}{{#if penalidade}} · {{penalidade}}{{/if}}</small>
+          </div>
+          <div class="se-item-acoes">
+            <button type="button" class="se-botao {{#if vestida}}ativo{{/if}}" data-action="itemVestir">{{#if vestida}}Vestida{{else}}Vestir{{/if}}</button>
+            <button type="button" class="se-icone" data-action="itemEditar" aria-label="Editar">✎</button>
+            <button type="button" class="se-icone" data-action="itemApagar" aria-label="Remover">✕</button>
+          </div>
+        </div>
+        {{else}}
+        <p class="se-vazio">Nenhuma proteção. Só uma pode ser vestida por vez e o PR não se acumula.</p>
+        {{/each}}
+      </section>
+
+      <section class="se-painel">
+        <h3>Resistência à Morte</h3>
+        <div class="se-morte {{#if caido}}ativa{{/if}}">
+          <div class="se-morte-trilha">
+            <span>Sucessos</span>
+            <input type="number" name="system.morte.sucessos" value="{{morte.sucessos}}" min="0" max="3">
+          </div>
+          <div class="se-morte-trilha">
+            <span>Fracassos</span>
+            <input type="number" name="system.morte.fracassos" value="{{morte.fracassos}}" min="0" max="3">
+          </div>
+          <button type="button" class="se-botao perigo" data-action="rolarMorte">Rolar resistência</button>
+        </div>
+        <p class="se-dica">Com 0 PV, role no início de cada turno: 1d20 sem modificadores. 10–19 sucesso, 2–9 fracasso, 1 natural são 2 fracassos, 20 natural recupera 1 PV.</p>
+      </section>
+
+      <section class="se-painel">
+        <h3>Testes de resistência</h3>
+        <div class="se-botoes-grade">
+          <button type="button" class="se-botao" data-action="rolarPanico">Pânico · NA 12</button>
+          <button type="button" class="se-botao" data-action="rolarVontade" data-na="15" data-rotulo="Perda de Sanidade (NA 15)">Sanidade · NA 15</button>
+          <button type="button" class="se-botao" data-action="rolarVontade" data-na="15" data-rotulo="Trauma (NA 15)">Trauma · NA 15</button>
+          <button type="button" class="se-botao" data-action="rolarResistencia" data-chave="con" data-cd="14" data-rotulo="Teste de Ferimento (CON CD 14)">Ferimento · CON 14</button>
+          <button type="button" class="se-botao" data-action="rolarResistencia" data-chave="con" data-cd="14" data-rotulo="Progressão da Infecção (CON CD 14)">Infecção · CON 14</button>
+          <button type="button" class="se-botao" data-action="descansoCurto">Descanso Curto</button>
+          <button type="button" class="se-botao" data-action="descansoLongo">Descanso Longo</button>
+        </div>
+      </section>
+    </div>
+    {{/if}}
+
+    {{!-- ---------- INVENTÁRIO ---------- --}}
+    {{#if (eq aba "inventario")}}
+    <div class="se-inventario">
+      <section class="se-painel">
+        <div class="se-carga-topo">
+          <label>Mochila
+            <select name="system.mochila">{{selectOptions opMochila selected=system.mochila}}</select>
+          </label>
+          <strong class="{{#if system.carga.excedeu}}excedeu{{/if}}">{{system.carga.usado}} / {{system.carga.max}} compartimentos</strong>
+        </div>
+        <div class="se-barra-carga {{#if system.carga.excedeu}}excedeu{{/if}}"><span style="width: {{cargaPct}}%"></span></div>
+        <p class="se-dica">Armas ocupam 1 compartimento (armas longas 2). Proteções vestidas não ocupam espaço. Itens de categorias diferentes não dividem compartimento.</p>
+      </section>
+
+      <section class="se-painel">
+        <h3>Equipamentos
+          <span class="se-novo">
+            <button type="button" class="se-botao pequeno" data-action="itemCriar" data-tipo="equipamento">Novo item</button>
+            <button type="button" class="se-botao pequeno" data-action="itemCriar" data-tipo="arma">Nova arma</button>
+            <button type="button" class="se-botao pequeno" data-action="itemCriar" data-tipo="protecao">Nova proteção</button>
+          </span>
+        </h3>
+        {{#each equipamentos}}
+        <div class="se-linha-item" data-item-id="{{id}}" draggable="true">
+          <img src="{{img}}" alt="">
+          <div class="se-item-info"><strong>{{nome}}</strong><small>{{categoria}} · {{espaco}} comp.</small></div>
+          <div class="se-item-acoes">
+            <button type="button" class="se-icone" data-action="itemQtd" data-delta="-1" aria-label="Diminuir">−</button>
+            <span class="se-qtd">{{quantidade}}</span>
+            <button type="button" class="se-icone" data-action="itemQtd" data-delta="1" aria-label="Aumentar">+</button>
+            <button type="button" class="se-icone" data-action="itemEditar" aria-label="Editar">✎</button>
+            <button type="button" class="se-icone" data-action="itemApagar" aria-label="Remover">✕</button>
+          </div>
+        </div>
+        {{else}}
+        <p class="se-vazio">Mochila vazia.</p>
+        {{/each}}
+      </section>
+    </div>
+    {{/if}}
+
+    {{!-- ---------- HABILIDADES ---------- --}}
+    {{#if (eq aba "habilidades")}}
+    <div class="se-habilidades">
+      <section class="se-painel">
+        <div class="se-pe">
+          <label>PE disponíveis<input type="number" name="system.pe.disponivel" value="{{system.pe.disponivel}}" min="0"></label>
+          <div class="se-pe-investidos"><span class="se-pe-titulo">PE investidos</span><strong>{{peGastos}}</strong><small>Perícias + habilidades</small></div>
+        </div>
+        <p class="se-dica">Proficiência custa 5 PE, Especialização mais 10 PE. Os PE não podem aumentar os PV máximos.</p>
+      </section>
+      <section class="se-painel">
+        <h3>Habilidades passivas
+          <span class="se-novo"><button type="button" class="se-botao pequeno" data-action="itemCriar" data-tipo="habilidade">Nova habilidade</button></span>
+        </h3>
+        {{#each habilidades}}
+        <div class="se-linha-item" data-item-id="{{id}}" draggable="true">
+          <img src="{{img}}" alt="">
+          <div class="se-item-info"><strong>{{nome}}</strong><small>{{custo}} PE{{#if prereq}} · {{prereq}}{{/if}}{{#if temUsos}} · Usos {{usos}}/{{usosMax}}{{#if recarga}} ({{recarga}}){{/if}}{{/if}}</small></div>
+          <div class="se-item-acoes">
+            {{#if temUsos}}<button type="button" class="se-botao" data-action="habilidadeUsar" title="Usar a habilidade (gasta 1 uso)">Usar</button>{{/if}}
+            <button type="button" class="se-icone" data-action="itemEditar" aria-label="Abrir">✎</button>
+            <button type="button" class="se-icone" data-action="itemApagar" aria-label="Remover">✕</button>
+          </div>
+        </div>
+        {{else}}
+        <p class="se-vazio">Nenhuma habilidade. Arraste do compêndio “Habilidades Passivas”.</p>
+        {{/each}}
+      </section>
+    </div>
+    {{/if}}
+
+    {{!-- ---------- CONDIÇÕES ---------- --}}
+    {{#if (eq aba "condicoes")}}
+    <div class="se-condicoes">
+      <section class="se-painel">
+        <h3>Condições ativas</h3>
+        <div class="se-chips">
+          {{#each condicoes}}
+          <label class="se-chip {{#if ativa}}ativa{{/if}}">
+            <input type="checkbox" name="system.condicoes.{{chave}}" {{checked ativa}}>
+            <span>{{nome}}</span>
+          </label>
+          {{/each}}
+        </div>
+        <p class="se-dica">Aplicados automaticamente nas rolagens: Contaminado (−1 FOR/AGI/CON), Atordoado (−2 AGI), Desidratação (Desvantagem em CON/INT e −3 m de deslocamento). Os demais efeitos ficam por conta da mesa.</p>
+      </section>
+
+      <section class="se-painel">
+        <h3>Ferimentos
+          <span class="se-novo"><button type="button" class="se-botao pequeno" data-action="ferimentoAdd">Adicionar</button></span>
+        </h3>
+        {{#each ferimentos}}
+        <div class="se-ferimento">
+          <select name="system.ferimentos.{{i}}.gravidade">{{selectOptions ../opGravidade selected=gravidade}}</select>
+          <input type="text" name="system.ferimentos.{{i}}.local" value="{{local}}" placeholder="Local">
+          <input type="text" name="system.ferimentos.{{i}}.nota" value="{{nota}}" placeholder="Observação">
+          <button type="button" class="se-icone" data-action="ferimentoDel" data-i="{{i}}" aria-label="Remover ferimento">✕</button>
+        </div>
+        {{else}}
+        <p class="se-vazio">Nenhum ferimento.</p>
+        {{/each}}
+      </section>
+    </div>
+    {{/if}}
+
+    {{!-- ---------- HISTÓRIA ---------- --}}
+    {{#if (eq aba "historia")}}
+    <div class="se-historia">
+      <section class="se-painel">
+        <label>Motivação principal<input type="text" name="system.biografia.motivacao" value="{{system.biografia.motivacao}}"></label>
+        <label>Personalidade<input type="text" name="system.biografia.personalidade" value="{{system.biografia.personalidade}}"></label>
+        <label>Tendência moral<select name="system.biografia.tendencia">{{selectOptions opTendencia selected=system.biografia.tendencia}}</select></label>
+        <label>Princípio<input type="text" name="system.biografia.principio" value="{{system.biografia.principio}}"></label>
+        <label>Limite moral<input type="text" name="system.biografia.limite" value="{{system.biografia.limite}}"></label>
+      </section>
+      <section class="se-painel">
+        <label>Anotações<textarea name="system.biografia.notas" rows="10">{{system.biografia.notas}}</textarea></label>
+      </section>
+    </div>
+    {{/if}}
+    {{#if paginaExtra}}<div class="se-pagina-ext">{{{paginaExtra}}}</div>{{/if}}
+    {{{slot}}}
+  </div>
+  {{/if}}
+
+  </div>
+
+  {{!-- ============ ABAS LATERAIS ============ --}}
+  <nav class="se-abas-lateral" role="tablist" aria-label="Páginas da ficha" aria-orientation="vertical">
+    {{#each paginas}}
+    <button type="button" role="tab" data-action="aba" data-aba="{{id}}" class="{{#if ativa}}ativa{{/if}}" aria-selected="{{#if ativa}}true{{else}}false{{/if}}">{{nome}}</button>
+    {{/each}}
+  </nav>
+</div>
