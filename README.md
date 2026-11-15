@@ -74,7 +74,7 @@ O Sangue Escuro RPG pode ser complementado com módulos de extensão opcionais. 
 Focado em automatizar etapas do combate, auxiliar na aplicação das regras e reduzir tarefas repetitivas, dando mais espaço para as decisões dos jogadores e a condução da cena pelo mestre.
 
 ```text
-https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG/main/system.json
+https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG-Combate_Automatizado/main/module.json
 ```
 
 ### 🏕️ Logística — Abrigos e Viagem
