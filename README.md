@@ -46,6 +46,9 @@ O apoio voluntário não constitui pagamento pelo acesso à expansão de fãs, n
 
 O projeto respeita os direitos de propriedade intelectual dos titulares das franquias utilizadas como referência. O apoio ao trabalho autoral não representa aquisição de direitos sobre essas franquias nem autorização ou endosso de seus respectivos titulares.
 
+#### ☕ Apoie o projeto
+Se quiser contribuir com o desenvolvimento do Sangue Escuro RPG, me apoie pelo [Ko-fi](https://ko-fi.com/yobwrz) ou [Patreon](https://www.patreon.com/12868270/join). Toda contribuição é opcional e bem-vinda!
+
 ---
 ### Support the Dark Blood Project
 **Sangue Escuro RPG** or **Dark Blood RPG** is an independent tabletop role-playing game project built around its original rules system, **Sangue Escuro Engine**.
