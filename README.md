@@ -1,6 +1,6 @@
-# 🩸 Sangue Escuro RPG — Dark Blood RPG
+# 🩸 Sangue Escuro RPG
 
-### Bem-vindo ao Dark Blood Engine
+### Bem-vindo ao Dark Blood RPG
 
 Sangue Escuro é um RPG de Survival Horror ambientado em um mundo apocalíptico assolado por mortos-vivos. O principal objetivo dos jogadores é sobreviver a qualquer custo, enfrentando os desafios impostos pelo cenário criado pelo Mestre.
 
@@ -22,3 +22,44 @@ https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG/main/system.json
 4. Clique em **Instalar**.
 5. Crie um mundo e selecione **Sangue Escuro RPG** como sistema.
 ---
+
+## Sangue Escuro Engine
+**Sangue Escuro Engine** é um sistema de regras de RPG de mesa desenvolvido de forma independente e utilizado como base mecânica das publicações do projeto **Dark Blood RPG**.
+
+O livro-base, suas contribuições autorais e demais materiais originais constituem publicações próprias do projeto, independentes das franquias utilizadas como referência em suplementos de fãs.
+
+O responsável pelo projeto poderá disponibilizar, licenciar ou comercializar suas publicações originais, observados os direitos de terceiros eventualmente envolvidos.
+
+As condições de distribuição gratuita estabelecidas nesta expansão aplicam-se exclusivamente ao presente suplemento e não restringem a comercialização do livro-base ou de outras obras originais do projeto.
+
+A utilização de **Sangue Escuro Engine** como sistema de regras não implica qualquer associação, licença, aprovação ou endosso dos titulares da franquias.
+
+--- 
+### Apoie o Projeto Dark Blood RPG
+O **Sangue Escuro RPG** ou **Dark Blood RPG** é um projeto independente de criação de jogos de interpretação de personagens, desenvolvido a partir de seu sistema original, **Sangue Escuro Engine**.
+
+O projeto inclui publicações autorais próprias, que podem ser comercializadas, e suplementos de fãs baseados em franquias de terceiros, disponibilizados gratuitamente e sem venda do material.
+
+Se você aprecia o trabalho desenvolvido, pode apoiar o projeto adquirindo suas publicações originais ou oferecendo uma contribuição voluntária para incentivar a criação de novos conteúdos autorais de RPG de mesa.
+
+O apoio voluntário não constitui pagamento pelo acesso à expansão de fãs, não concede benefícios exclusivos relacionados a franquias de terceiros e não garante a publicação de futuras adaptações. As expansões de fãs permanecem gratuitas, independentemente de qualquer contribuição.
+
+O projeto respeita os direitos de propriedade intelectual dos titulares das franquias utilizadas como referência. O apoio ao trabalho autoral não representa aquisição de direitos sobre essas franquias nem autorização ou endosso de seus respectivos titulares.
+
+---
+### Support the Dark Blood Project
+**Sangue Escuro RPG** or **Dark Blood RPG** is an independent tabletop role-playing game project built around its original rules system, **Sangue Escuro Engine**.
+
+The project includes original publications, which may be commercially distributed, and unofficial fan supplements based on third-party franchises, which are made available free of charge and are not offered for sale.
+
+If you enjoy the creator's work, you can support the project by purchasing its original publications or making a voluntary contribution to encourage the development of new original tabletop RPG content. Voluntary contributions are not payments for access to fan expansions, do not grant exclusive benefits related to third-party franchises, and do not guarantee the release of future adaptations.
+
+**Fan expansions remain freely available regardless of any contribution.**
+
+The project respects the intellectual property rights of the respective franchise owners. Supporting the creator's original work does not constitute the purchase of rights to those franchises or imply authorization or endorsement by their owners.
+
+---
+**Sangue Escuro Engine** é um motor de regras, **Sangue Escuro RPG: Guia dos Mortos** se trata da publicação original comercializável e **Dark Blood RPG: \[Franquia\]: Expansão** é a linha de adaptações gratuitas de fãs.
+
+
+
