@@ -62,7 +62,14 @@ If you enjoy the creator's work, you can support the project by purchasing its o
 The project respects the intellectual property rights of the respective franchise owners. Supporting the creator's original work does not constitute the purchase of rights to those franchises or imply authorization or endorsement by their owners.
 
 ---
+[![Apoie o projeto](https://imgur.com/wbChZcy.png)](https://www.patreon.com/12868270/join)
+
+---
 **Sangue Escuro Engine** é um motor de regras, **Sangue Escuro RPG: Guia dos Mortos** se trata da publicação original comercializável e **Dark Blood RPG: \[Franquia\]: Expansão** é a linha de adaptações gratuitas de fãs.
+
+
+
+
 
 
 
