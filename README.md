@@ -8,7 +8,7 @@ A proposta central do jogo gira em torno de pessoas comuns, lançadas em uma rea
 
 A tensão constante, a escassez de recursos e as ameaças imprevisíveis tornam cada decisão crucial para a sobrevivência do grupo.
 
-## 🎲 Como instalar no Foundry
+### 🎲 Como instalar no Foundry
 Você precisa do **Foundry VTT 13**. 
 
 1. Abra a tela de configuração do Foundry.
