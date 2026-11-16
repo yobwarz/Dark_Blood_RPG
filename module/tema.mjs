@@ -50,12 +50,18 @@ const VARIAVEIS = {
   creme: "--se-creme", cremeTexto: "--se-creme-texto", pip: "--se-pip"
 };
 
-export function temaAtual() {
-  const mundo = game.settings.get(SISTEMA, "tema") ?? {};
-  const pessoal = game.settings.get(SISTEMA, "temaPessoal") ?? {};
-  const limpo = (o) => Object.fromEntries(Object.entries(o).filter(([k, v]) => k in TEMA_PADRAO && HEX.test(v)));
-  return { ...TEMA_PADRAO, ...limpo(mundo), ...limpo(pessoal) };
+export function limparPaleta(dados) {
+  return Object.fromEntries(Object.entries(dados??{}).filter(([k,v])=>Object.hasOwn(TEMA_PADRAO,k)&&typeof v==='string'&&HEX.test(v)).map(([k,v])=>[k,v.toLowerCase()]));
 }
+export function temaDoMundo() { return {...TEMA_PADRAO,...limparPaleta(game.settings.get(SISTEMA,'tema'))}; }
+export function coresPessoaisAtivas() {
+  return game.settings.get(SISTEMA,'temaPessoalAtivo')!==false&&Object.keys(limparPaleta(game.settings.get(SISTEMA,'temaPessoal'))).length>0;
+}
+export function temaAtual() {
+  return {...temaDoMundo(),...(coresPessoaisAtivas()?limparPaleta(game.settings.get(SISTEMA,'temaPessoal')):{})};
+}
+let filaTema=Promise.resolve();
+function serializarTema(fn){const p=filaTema.catch(()=>{}).then(fn);filaTema=p;return p;}
 
 export function aplicarTema() {
   const tema = temaAtual();
@@ -85,11 +91,12 @@ class TemaConfig extends HandlebarsApplicationMixin(ApplicationV2) {
 
   async _prepareContext() {
     const guardado = game.settings.get(SISTEMA, this.constructor.CHAVE) ?? {};
-    const valores = this.constructor.CHAVE === "tema" ? { ...TEMA_PADRAO, ...guardado } : temaAtual();
+    const valores = this.constructor.CHAVE === "tema" ? temaDoMundo() : {...temaDoMundo(),...limparPaleta(guardado)};
     return {
       campos: Object.keys(TEMA_PADRAO).map((k) => ({ chave: k, rotulo: ROTULOS[k], valor: valores[k] })),
       presets: Object.keys(PRESETS),
-      pessoal: this.constructor.CHAVE === "temaPessoal"
+      pessoal: this.constructor.CHAVE === "temaPessoal",
+      pessoalAtivo: coresPessoaisAtivas()
     };
   }
 
@@ -98,8 +105,8 @@ class TemaConfig extends HandlebarsApplicationMixin(ApplicationV2) {
     this.element.querySelectorAll(".se-cor-linha").forEach((linha) => {
       const cor = linha.querySelector("input[type=color]");
       const txt = linha.querySelector("input[type=text]");
-      cor.addEventListener("input", () => (txt.value = cor.value));
-      txt.addEventListener("input", () => { if (HEX.test(txt.value)) cor.value = txt.value; });
+      cor.oninput = cor.onchange = () => { txt.value = cor.value; };
+      txt.oninput = txt.onchange = () => { const value=txt.value.trim();if(HEX.test(value))cor.value=value; };
     });
   }
 
@@ -112,21 +119,28 @@ class TemaConfig extends HandlebarsApplicationMixin(ApplicationV2) {
   }
 
   static async salvar(event, form, formData) {
-    const dados = formData.object;
-    const tema = {};
-    for (const k of Object.keys(TEMA_PADRAO)) {
-      const v = (dados[`txt-${k}`] ?? "").trim();
-      if (HEX.test(v)) tema[k] = v.toLowerCase();
-      else ui.notifications.warn(`Cor inválida em “${ROTULOS[k]}”: use o formato #RRGGBB.`);
+    const dados=formData.object,tema={};
+    for(const k of Object.keys(TEMA_PADRAO)){
+      const v=String(dados[`txt-${k}`]??'').trim();
+      if(!HEX.test(v)){const message=`Cor inválida em “${ROTULOS[k]}”: use o formato #RRGGBB.`;ui.notifications.warn(message);throw Error(message);}
+      tema[k]=v.toLowerCase();
     }
-    await game.settings.set(SISTEMA, this.constructor.CHAVE, tema);
+    const chave=this.constructor.CHAVE,seguirMundo=dados.seguirMundo===true||dados.seguirMundo==='on';
+    return serializarTema(async()=>{
+      if(chave==='tema'&&!game.user.isGM)throw Error('Somente o Mestre pode alterar as cores do mundo.');
+      await game.settings.set(SISTEMA,chave,tema);
+      if(chave==='temaPessoal')await game.settings.set(SISTEMA,'temaPessoalAtivo',true);
+      else if(seguirMundo)await game.settings.set(SISTEMA,'temaPessoalAtivo',false);
+      aplicarTema();
+      if(chave==='tema'&&coresPessoaisAtivas())ui.notifications.info('Cores do mundo salvas. Suas cores pessoais continuam ativas neste navegador.');
+    });
   }
 
   static restaurar() { this._preencher(TEMA_PADRAO); }
   static preset(event, alvo) { this._preencher(PRESETS[alvo.dataset.preset]); }
   static async limpar() {
-    await game.settings.set(SISTEMA, this.constructor.CHAVE, {});
-    this.close();
+    await serializarTema(async()=>{await game.settings.set(SISTEMA,'temaPessoalAtivo',false);aplicarTema();});
+    await this.close();
   }
 }
 
@@ -138,6 +152,9 @@ export class TemaPessoal extends TemaConfig {
 }
 
 export function registrarTema() {
+  game.settings.register(SISTEMA,'temaPessoalAtivo',{
+    scope:'client',config:false,type:Boolean,default:true,onChange:()=>aplicarTema()
+  });
   game.settings.register(SISTEMA, "tema", {
     scope: "world", config: false, type: Object, default: {}, onChange: () => aplicarTema()
   });

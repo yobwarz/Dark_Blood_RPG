@@ -2,7 +2,7 @@
   "id": "sangue-escuro",
   "title": "Sangue Escuro RPG",
   "description": "Sistema Sangue Escuro RPG, DRS 1.2 consolidado de 13/11/2026, com API de extensões 1.4 e regras de sobrevivência.",
-  "version": "0.8.6",
+  "version": "0.8.8",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
@@ -54,5 +54,5 @@
   ],
   "url": "https://github.com/yobwarz/Dark_Blood_RPG",
   "manifest": "https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG/main/system.json",
-  "download": "https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG/v0.8.6/dist/sangue-escuro.zip"
+  "download": "https://raw.githubusercontent.com/yobwarz/Dark_Blood_RPG/v0.8.8/dist/sangue-escuro.zip"
 }

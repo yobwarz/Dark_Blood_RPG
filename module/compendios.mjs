@@ -104,8 +104,8 @@ export function decorarDiretorio(app,html){
   el.dataset.seCompendioTipo=d.tipo;el.title=`${d.pastaNome} · ${d.nome}`;
   if(!habilitado())continue;
   const antigo=pack.metadata?.label;if(!antigo||antigo===d.nome)continue;
-  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;
-  while(node=walker.nextNode())if(node.parentElement?.tagName!=='SCRIPT'&&node.parentElement?.tagName!=='STYLE'&&node.textContent.includes(antigo))node.textContent=node.textContent.replaceAll(antigo,d.nome);
+  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let textNode;
+  while(textNode=walker.nextNode())if(textNode.parentElement?.tagName!=='SCRIPT'&&textNode.parentElement?.tagName!=='STYLE'&&textNode.textContent.includes(antigo))textNode.textContent=textNode.textContent.replaceAll(antigo,d.nome);
  }
 }
 export class OrganizarCompendiosMenu extends foundry.applications.api.ApplicationV2{

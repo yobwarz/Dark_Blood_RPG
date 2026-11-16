@@ -1,5 +1,13 @@
 <div class="se-config-corpo">
-  <p class="se-dica">Digite o código hexadecimal (#RRGGBB) ou use o seletor. As mudanças valem para todas as fichas abertas assim que você salvar.</p>
+  <p class="se-dica">Digite o código hexadecimal (#RRGGBB) ou use o seletor. As mudanças aparecem nas fichas Clássicas abertas assim que você salvar.</p>
+
+  {{#if pessoal}}
+  <p class="se-dica">Salvar ativa suas cores pessoais neste navegador. “Usar as cores do mundo” volta a acompanhar o mundo e preserva sua paleta guardada.</p>
+  {{else}}
+  {{#if pessoalAtivo}}<p class="se-tema-aviso">Você está usando uma paleta pessoal, que tem prioridade sobre as cores do mundo neste navegador.</p>{{/if}}
+  <label class="se-tema-seguir"><input type="checkbox" name="seguirMundo" checked> Usar estas cores também para mim (seguir as cores do mundo)</label>
+  <p class="se-dica">Esta opção desativa sua sobreposição pessoal sem apagá-la. Os outros jogadores mantêm suas próprias preferências.</p>
+  {{/if}}
 
   <div class="se-config-presets">
     {{#each presets}}

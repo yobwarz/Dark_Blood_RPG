@@ -26,3 +26,20 @@ game.user.isGM=false;assert.equal(await c.organizarBiblioteca({forcar:true}),0);
 // Falha de apresentação não interrompe a criação/importação do compêndio.
 const erro=pack('teste-itens');erro.setFolder=async()=>{throw Error('Falha simulada');};const original=console.error;console.error=()=>{};try{assert.equal(await c.organizarPack(erro,novo,{forcar:true}),0);}finally{console.error=original;}assert.equal(valores.get('versaoPastasCompendios'),0);
 console.log('OK: pastas nativas para base/RE4/FH/Dead Space, IDs e metadados preservados, sem ler/apagar documentos, repetição sem duplicatas, organização manual, futuras expansões, configurações, permissões e recuperação de falha.');
+
+// Executa os ganchos de renderização com uma entrada realista, não apenas a organização.
+const pRender=game.packs.get('world.sangue-escuro-regras');
+const titulo={textContent:pRender.metadata.label,parentElement:{tagName:'SPAN'}};
+const script={textContent:pRender.metadata.label,parentElement:{tagName:'SCRIPT'}};
+const style={textContent:pRender.metadata.label,parentElement:{tagName:'STYLE'}};
+const classes=new Set();const linha={dataset:{pack:pRender.collection},classList:{toggle(k,v){if(v)classes.add(k);else classes.delete(k);}},closest(){return this;}};
+const raizDOM={querySelectorAll(){return [linha];}};
+globalThis.NodeFilter={SHOW_TEXT:4};
+globalThis.document={createTreeWalker(el,tipo){assert.equal(el,linha);assert.equal(tipo,4);let i=0;return {nextNode:()=>[titulo,script,style][i++]??null};}};
+const labelOriginal=pRender.metadata.label;
+hooks.get('renderCompendiumDirectory')({},raizDOM);
+assert.equal(titulo.textContent,'Regras (DRS)');assert.equal(script.textContent,labelOriginal);assert.equal(style.textContent,labelOriginal);
+assert.equal(linha.dataset.seCompendioTipo,'regras');assert.ok(classes.has('se-compendio-compacto'));assert.equal(pRender.metadata.label,labelOriginal);
+titulo.textContent=labelOriginal;hooks.get('renderCompendiumDirectoryHTML')({},[raizDOM]);assert.equal(titulo.textContent,'Regras (DRS)');
+valores.set('organizarCompendios',false);titulo.textContent=labelOriginal;c.decorarDiretorio({},raizDOM);assert.equal(titulo.textContent,labelOriginal);
+console.log('OK: decoração dos dois ganchos de diretório, HTML nativo/jQuery, texto abreviado, scripts/estilos e metadados preservados.');

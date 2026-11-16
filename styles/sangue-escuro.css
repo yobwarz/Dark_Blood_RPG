@@ -658,3 +658,12 @@ img[src*="modules/sangue-escuro-fear-and-hunger/assets/icones/"] { background-co
 .ficha-sobrevivente:not(.se-alternativa-1) .se-pe .se-pe-investidos {gap:6px}
 .ficha-sobrevivente:not(.se-alternativa-1) .se-pe .se-pe-investidos strong {min-height:32px;display:flex;align-items:center}
 .ficha-sobrevivente:not(.se-alternativa-1) .se-pe .se-pe-investidos small {font:400 .9rem/1.4 var(--se-fonte-texto);color:var(--se-texto-fraco)}
+
+/* O editor diferencia a paleta do mundo da sobreposição pessoal persistida. */
+.sangue-escuro .se-tema-seguir{display:flex;flex-direction:row;align-items:center;gap:8px;font-size:15px;font-style:normal;line-height:1.4}
+.sangue-escuro .se-tema-seguir input{width:18px;height:18px;flex:none}
+.sangue-escuro .se-tema-aviso{border:1px solid var(--se-detalhe);padding:10px;font:400 15px/1.4 var(--se-fonte-texto);color:var(--se-texto)}
+
+.se-config .se-config-corpo{max-height:calc(100dvh - 110px);overflow:auto}
+.se-config .se-cores{flex-shrink:0}
+.se-config .se-config-rodape{position:sticky;bottom:-14px;background:var(--se-painel);padding:8px 0;margin-bottom:-6px}
